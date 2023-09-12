@@ -13,10 +13,21 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for _ in 0..<10 {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-        }
+        
+        let newExpense = Expense(context: viewContext)
+        newExpense.name = "Preview"
+        newExpense.details = "A preview expense"
+        newExpense.category = "Preview"
+        newExpense.dateCreated = Date()
+        newExpense.amount = 3.00
+        
+        let newExpense2 = Expense(context: viewContext)
+        newExpense2.name = "Preview"
+        newExpense2.details = "A preview expense 2"
+        newExpense2.category = "Preview"
+        newExpense2.dateCreated = Date()
+        newExpense2.amount = 5.00
+        
         do {
             try viewContext.save()
         } catch {
