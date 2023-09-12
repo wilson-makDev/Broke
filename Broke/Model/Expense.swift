@@ -47,6 +47,24 @@ extension Expense {
         return expenses
     }
     
+    static func withCategory(_ category: String, context: NSManagedObjectContext) -> [Expense] {
+        let request = NSFetchRequest<Expense>(entityName: "Expense")
+        request.predicate = NSPredicate(format: "category = %@", category)
+        request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
+        
+        let expenses: [Expense]
+        
+        do {
+            expenses = try context.fetch(request)
+            print("Data fetched")
+        } catch {
+            print("Fetch error: \(error)")
+            expenses = []
+        }
+        
+        return expenses
+    }
+    
     static func previewAll(context: NSManagedObjectContext) -> [Expense] {
         let request = NSFetchRequest<Expense>(entityName: "Expense")
         request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
