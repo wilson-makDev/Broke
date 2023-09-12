@@ -20,6 +20,7 @@
 		C163758E2AAB9CAD00C8A7A4 /* BrokeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C163758D2AAB9CAD00C8A7A4 /* BrokeUITestsLaunchTests.swift */; };
 		C1A3FE442AAF9EB800968A67 /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A3FE432AAF9EB800968A67 /* Expense.swift */; };
 		C1A3FE462AAFB65700968A67 /* SummaryExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A3FE452AAFB65700968A67 /* SummaryExpenseView.swift */; };
+		C1A3FE482AB0DB0A00968A67 /* RowExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A3FE472AB0DB0A00968A67 /* RowExpenseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		C163758D2AAB9CAD00C8A7A4 /* BrokeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C1A3FE432AAF9EB800968A67 /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		C1A3FE452AAFB65700968A67 /* SummaryExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryExpenseView.swift; sourceTree = "<group>"; };
+		C1A3FE472AB0DB0A00968A67 /* RowExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowExpenseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			children = (
 				C153558A2AAE6E1C00E9AEAE /* AddExpenseView.swift */,
 				C1A3FE452AAFB65700968A67 /* SummaryExpenseView.swift */,
+				C1A3FE472AB0DB0A00968A67 /* RowExpenseView.swift */,
 			);
 			path = ExpenseView;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				C163756D2AAB9CAA00C8A7A4 /* ContentView.swift in Sources */,
 				C153558B2AAE6E1C00E9AEAE /* AddExpenseView.swift in Sources */,
 				C163756B2AAB9CAA00C8A7A4 /* BrokeApp.swift in Sources */,
+				C1A3FE482AB0DB0A00968A67 /* RowExpenseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

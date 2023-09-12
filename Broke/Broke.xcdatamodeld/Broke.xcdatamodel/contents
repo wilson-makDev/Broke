@@ -6,6 +6,6 @@
         <attribute name="category" optional="YES" attributeType="String"/>
         <attribute name="dateCreated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="details" optional="YES" attributeType="String" defaultValueString=""/>
-        <attribute name="name" attributeType="String" defaultValueString=""/>
+        <attribute name="name" attributeType="String" defaultValueString="&quot;&quot;"/>
     </entity>
 </model>

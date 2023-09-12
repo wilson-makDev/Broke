@@ -15,18 +15,18 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         
         let newExpense = Expense(context: viewContext)
-        newExpense.name = "Preview"
-        newExpense.details = "A preview expense"
-        newExpense.category = "Preview"
-        newExpense.dateCreated = Date()
+        newExpense.name = "Cheese"
+        newExpense.details = "I wanted cheese"
+        newExpense.category = "Groceries"
+        newExpense.dateCreated = Calendar.current.date(byAdding: DateComponents(day: -2), to: Date())!
         newExpense.amount = 3.00
         
         let newExpense2 = Expense(context: viewContext)
-        newExpense2.name = "Preview"
-        newExpense2.details = "A preview expense 2"
-        newExpense2.category = "Preview"
-        newExpense2.dateCreated = Date()
-        newExpense2.amount = 5.00
+        newExpense2.name = "Water"
+        newExpense2.details = ""
+        newExpense2.category = "Utilities"
+        newExpense2.dateCreated = Calendar.current.date(byAdding: DateComponents(day: -5), to: Date())!
+        newExpense2.amount = 310.00
         
         do {
             try viewContext.save()
