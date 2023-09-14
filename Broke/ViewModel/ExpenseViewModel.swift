@@ -10,15 +10,24 @@ import CoreData
 
 class ExpenseViewModel: ObservableObject {
     private let viewContent = PersistenceController.shared.container.viewContext
-    @Published private(set) var expenseArray: [Expense] = []
+    private var predicate: NSPredicate = NSPredicate()
+    private var sortDescriptors: [NSSortDescriptor] = [NSSortDescriptor()]
+    
+    @Published var expenseArray: [Expense] = []
     
     init() {
         fetchExpenseData()
     }
     
+    func modifyFetch(predicate: NSPredicate, sortDescriptor: [NSSortDescriptor]) {
+        self.predicate = predicate
+        self.sortDescriptors = sortDescriptor
+    }
     
     func fetchExpenseData() {
         let request = NSFetchRequest<Expense>(entityName: "Expense")
+        request.predicate = self.predicate
+        request.sortDescriptors = self.sortDescriptors
         
         do {
             expenseArray = try viewContent.fetch(request)
