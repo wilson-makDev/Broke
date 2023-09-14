@@ -10,8 +10,8 @@ import SwiftUI
 import CoreData
 
 class ExpenseDateRangeViewModel: ExpenseViewModel {
-    private var dateRange: (from: Date, to: Date) = (Calendar.current.date(byAdding: DateComponents(month: -1), to: Date())!,
-                                                    Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: Date())!)
+    private(set) var dateRange: (from: Date, to: Date) = (Calendar.current.date(byAdding: DateComponents(month: -1), to: Date())!,
+                                                          Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: Date())!)
     
     override init() {
         super.init()
@@ -27,22 +27,22 @@ class ExpenseDateRangeViewModel: ExpenseViewModel {
     }
     
     private func updateFetchString() {
-        let request = NSFetchRequest<Expense>(entityName: "Expense")
         let fromDate = NSPredicate(format: "dateCreated >= %@", dateRange.from as NSDate)
         let toDate = NSPredicate(format: "dateCreated <= %@", dateRange.to as NSDate)
         let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromDate, toDate])
-        let sortDesciptor = [NSSortDescriptor(key: "dateCreated", ascending: false)]
         
-        self.modifyFetch(predicate: predicate, sortDescriptor: sortDesciptor)
+        self.predicate = predicate
     }
     
     func changeDateRange(from: Date) {
+        print("CHANGED FROM")
         self.dateRange.from = from
         self.updateFetchString()
         self.fetchExpenseData()
     }
     
     func changeDateRange(to: Date) {
+        print("CHANGED TO")
         self.dateRange.to = to
         self.updateFetchString()
         self.fetchExpenseData()
@@ -52,6 +52,12 @@ class ExpenseDateRangeViewModel: ExpenseViewModel {
         self.dateRange = (from, to)
         self.updateFetchString()
         self.fetchExpenseData()
+    }
+    
+    func getTotalExpenses() -> Float {
+        return self.expenseArray.reduce(0) { partialResult, expense in
+            partialResult + expense.amount
+        }
     }
     
 }

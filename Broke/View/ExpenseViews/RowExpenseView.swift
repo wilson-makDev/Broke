@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct RowExpenseView: View {
-    let expense: Expense
-    
+    @ObservedObject var expense: Expense
     @State private var opened = false
     
     var body: some View {

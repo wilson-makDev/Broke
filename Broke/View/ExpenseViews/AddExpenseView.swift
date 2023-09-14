@@ -13,17 +13,15 @@ struct AddExpenseView: View {
     @State private var name : String = ""
     @State private var description : String = ""
     @State private var amount : Float = 0.00
-    @State private var category: String = ""
+    @State private var category: String = "Bills"
     @State private var newCategory: String = ""
     @State private var dateCreated = Date()
+    
+    @ObservedObject var expenseVM: ExpenseDateRangeViewModel
     
     private let currencyFormat = CurrencyFormater()
     
     @Environment(\.managedObjectContext) var context
-    
-    init() {
-        category = categories.first!
-    }
     
     var body: some View {
         NavigationView {
@@ -76,8 +74,8 @@ struct AddExpenseView: View {
                         expense.amount = amount
                         expense.dateCreated = Date()
                         
-                        try? context.save()
-                        
+                        expenseVM.addExpesnse(name: name, details: description, category: category, amount: amount)
+
                         resetInputs()
                     }.disabled(!validExpense())
                 }
@@ -93,13 +91,18 @@ struct AddExpenseView: View {
         name = ""
         description = ""
         amount = 0.00
-        category = ""
+        category = "Bills"
         dateCreated = Date()
+        
+        print(context.registeredObjects.count)
+        context.registeredObjects.forEach { expense in
+            print(expense)
+        }
     }
 }
 
 struct AddExpenseView_Previews: PreviewProvider {
     static var previews: some View {
-        AddExpenseView()
+        AddExpenseView(expenseVM: ExpenseDateRangeViewModel())
     }
 }

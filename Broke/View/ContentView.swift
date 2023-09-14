@@ -9,16 +9,22 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    @ObservedObject var expenseVM: ExpenseDateRangeViewModel
 
     var body: some View {
-        VStack {
-            AddExpenseView()
+        NavigationView {
+            VStack {
+                SummaryExpenseView(expenseVM: expenseVM)
+                DateRangePickerView(expenseVM: expenseVM, fromDate: expenseVM.dateRange.from, toDate: expenseVM.dateRange.to)
+            }
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    private static var viewModel = ExpenseDateRangeViewModel()
+    
     static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView(expenseVM: viewModel)
     }
 }

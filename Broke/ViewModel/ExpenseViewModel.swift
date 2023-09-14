@@ -9,9 +9,9 @@ import Foundation
 import CoreData
 
 class ExpenseViewModel: ObservableObject {
-    private let viewContent = PersistenceController.shared.container.viewContext
-    private var predicate: NSPredicate = NSPredicate()
-    private var sortDescriptors: [NSSortDescriptor] = [NSSortDescriptor()]
+    private let viewContent = PersistenceController.preview.container.viewContext
+    var predicate: NSPredicate?
+    var sortDescriptors: [NSSortDescriptor] = [NSSortDescriptor(key: "dateCreated", ascending: false)]
     
     @Published var expenseArray: [Expense] = []
     
@@ -19,14 +19,12 @@ class ExpenseViewModel: ObservableObject {
         fetchExpenseData()
     }
     
-    func modifyFetch(predicate: NSPredicate, sortDescriptor: [NSSortDescriptor]) {
-        self.predicate = predicate
-        self.sortDescriptors = sortDescriptor
-    }
-    
     func fetchExpenseData() {
         let request = NSFetchRequest<Expense>(entityName: "Expense")
-        request.predicate = self.predicate
+        
+        if predicate != nil {
+            request.predicate = self.predicate
+        }
         request.sortDescriptors = self.sortDescriptors
         
         do {
@@ -52,7 +50,7 @@ class ExpenseViewModel: ObservableObject {
         expense.category = category
         expense.amount = amount
         
-        save()
+        self.save()
         self.fetchExpenseData()
     }
 }
