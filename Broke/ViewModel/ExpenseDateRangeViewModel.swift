@@ -10,7 +10,7 @@ import SwiftUI
 import CoreData
 
 class ExpenseDateRangeViewModel: ExpenseViewModel {
-    @State private var dateRange: (from: Date, to: Date) = (Calendar.current.date(byAdding: DateComponents(month: -1), to: Date())!,
+    private var dateRange: (from: Date, to: Date) = (Calendar.current.date(byAdding: DateComponents(month: -1), to: Date())!,
                                                     Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: Date())!)
     
     override init() {
