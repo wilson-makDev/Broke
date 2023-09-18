@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SummaryExpenseView: View {
-    @ObservedObject var expenseVM: ExpenseDateRangeViewModel
+    @ObservedObject var expenseVM: ExpenseViewModel
     
     var body: some View {
         VStack(alignment: .center) {
@@ -31,7 +31,7 @@ struct SummaryExpenseView: View {
 }
 
 struct SummaryExpenseView_Previews: PreviewProvider {
-    static let expenseVM = ExpenseDateRangeViewModel()
+    static let expenseVM = ExpenseViewModel()
     
     static var previews: some View {
         SummaryExpenseView(expenseVM: expenseVM).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

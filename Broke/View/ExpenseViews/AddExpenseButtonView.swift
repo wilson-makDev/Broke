@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddExpenseButtonView: View {
     
-    @ObservedObject var expenseVM: ExpenseDateRangeViewModel
+    @ObservedObject var expenseVM: ExpenseViewModel
     
     var body: some View {
         NavigationLink {
@@ -28,6 +28,6 @@ struct AddExpenseButtonView: View {
 
 struct AddExpenseButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        AddExpenseButtonView(expenseVM: ExpenseDateRangeViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        AddExpenseButtonView(expenseVM: ExpenseViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

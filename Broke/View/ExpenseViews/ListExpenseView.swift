@@ -11,18 +11,21 @@ struct ListExpenseView: View {
     var expenses: [Expense]
     
     var body: some View {
-        ScrollView {
-            ForEach(expenses) { expense in
-                RowExpenseView(expense: expense)
+        VStack(alignment: .trailing) {
+            Text("Recent").font(.subheadline)
+            ScrollView {
+                ForEach(expenses) { expense in
+                    RowExpenseView(expense: expense)
+                }
             }
+            .animation(.easeIn, value: expenses.count)
+            .scrollIndicators(.visible)
         }
-        .animation(.easeIn, value: expenses.count)
-        .scrollIndicators(.visible)
     }
 }
 
 struct ListExpenseView_Previews: PreviewProvider {
-    static let expenseVM = ExpenseDateRangeViewModel()
+    static let expenseVM = ExpenseViewModel()
     
     static var previews: some View {
         ListExpenseView(expenses: expenseVM.expenseArray).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)

@@ -17,7 +17,7 @@ struct AddExpenseView: View {
     @State private var newCategory: String = ""
     @State private var dateCreated = Date()
     
-    @ObservedObject var expenseVM: ExpenseDateRangeViewModel
+    @ObservedObject var expenseVM: ExpenseViewModel
     
     private let currencyFormat = CurrencyFormater()
     
@@ -67,7 +67,7 @@ struct AddExpenseView: View {
                         DatePicker("Purchased On:", selection: $dateCreated, displayedComponents: [.date])
                     }
                     Button("Add Expense") {
-                        expenseVM.addExpesnse(name: name, details: description, category: category, amount: amount)
+                        expenseVM.addExpesnse(name: name, details: description, category: category, amount: amount, date: dateCreated)
 
                         resetInputs()
                     }.disabled(!validExpense())
@@ -91,6 +91,6 @@ struct AddExpenseView: View {
 
 struct AddExpenseView_Previews: PreviewProvider {
     static var previews: some View {
-        AddExpenseView(expenseVM: ExpenseDateRangeViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        AddExpenseView(expenseVM: ExpenseViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

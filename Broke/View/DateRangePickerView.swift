@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DateRangePickerView: View {
-    @ObservedObject var expenseVM: ExpenseDateRangeViewModel
+    @ObservedObject var expenseVM: ExpenseViewModel
     @State var fromDate : Date
     @State var toDate : Date
     
@@ -17,12 +17,12 @@ struct DateRangePickerView: View {
             Text("Date Range").font(.headline)
             HStack {
                 DatePicker("From:", selection: $fromDate , displayedComponents: [.date])
-                    .onChange(of: fromDate) { newValue in
-                        expenseVM.changeDateRange(from: newValue)
+                    .onChange(of: fromDate) { newFromDate in
+                        expenseVM.changeDateRange(newFromDate, toDate)
                     }
                 DatePicker("To:", selection: $toDate, displayedComponents: [.date])
-                    .onChange(of: toDate) { newValue in
-                        expenseVM.changeDateRange(to: newValue)
+                    .onChange(of: toDate) { newToDate in
+                        expenseVM.changeDateRange(fromDate, newToDate)
                     }
             }
         }
@@ -33,9 +33,11 @@ struct DateRangePickerView: View {
 }
 
 struct DateRangePickerView_Previews: PreviewProvider {
-    static let expenseVM = ExpenseDateRangeViewModel()
+    static let expenseVM = ExpenseViewModel()
+    private static let dateRange: (from: Date, to: Date) = (Calendar.current.date(byAdding: DateComponents(month: -1), to: Date())!,
+                                                                   Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: Date())!)
     
     static var previews: some View {
-        DateRangePickerView(expenseVM: expenseVM, fromDate: expenseVM.dateRange.from, toDate: expenseVM.dateRange.to)
+        DateRangePickerView(expenseVM: expenseVM, fromDate: dateRange.from, toDate: dateRange.to)
     }
 }

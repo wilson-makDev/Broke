@@ -46,7 +46,7 @@ struct RowExpenseView: View {
 struct RowExpenseView_Previews: PreviewProvider {
     
     static let context = PersistenceController.preview.container.viewContext
-    static var expense = ExpenseDateRangeViewModel().expenseArray.first!
+    static var expense = ExpenseViewModel().expenseArray.first!
     
     static var previews: some View {
         RowExpenseView(expense: self.expense)
