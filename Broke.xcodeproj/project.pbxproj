@@ -25,6 +25,7 @@
 		C1B54C582AB2542E00DFB867 /* TotalExpnesesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B54C572AB2542E00DFB867 /* TotalExpnesesView.swift */; };
 		C1B54C5A2AB254A700DFB867 /* DateRangePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B54C592AB254A700DFB867 /* DateRangePickerView.swift */; };
 		C1B54C5D2AB354E900DFB867 /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B54C5C2AB354E900DFB867 /* ExpenseViewModel.swift */; };
+		C1B54C612AB90C4100DFB867 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B54C602AB90C4100DFB867 /* CategoryViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		C1B54C572AB2542E00DFB867 /* TotalExpnesesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalExpnesesView.swift; sourceTree = "<group>"; };
 		C1B54C592AB254A700DFB867 /* DateRangePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangePickerView.swift; sourceTree = "<group>"; };
 		C1B54C5C2AB354E900DFB867 /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
+		C1B54C602AB90C4100DFB867 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				C1B54C5C2AB354E900DFB867 /* ExpenseViewModel.swift */,
+				C1B54C602AB90C4100DFB867 /* CategoryViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1B54C612AB90C4100DFB867 /* CategoryViewModel.swift in Sources */,
 				C16375742AAB9CAC00C8A7A4 /* Persistence.swift in Sources */,
 				C15355922AAE8D1900E9AEAE /* CurrencyFormatter.swift in Sources */,
 				C1B54C5D2AB354E900DFB867 /* ExpenseViewModel.swift in Sources */,
