@@ -25,6 +25,6 @@ struct ContentView_Previews: PreviewProvider {
     private static var viewModel = ExpenseDateRangeViewModel()
     
     static var previews: some View {
-        ContentView(expenseVM: viewModel)
+        ContentView(expenseVM: viewModel).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

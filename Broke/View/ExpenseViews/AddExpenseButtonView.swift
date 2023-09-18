@@ -16,17 +16,18 @@ struct AddExpenseButtonView: View {
             AddExpenseView(expenseVM: expenseVM)
         } label: {
             Image(systemName: "plus.circle")
+                .imageScale(.large)
+                .frame(minWidth: 200)
         }
         .padding()
         .foregroundColor(.accentColor)
         .background(.yellow)
         .cornerRadius(10)
-        .frame(minWidth: 400)
     }
 }
 
 struct AddExpenseButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        AddExpenseButtonView(expenseVM: ExpenseDateRangeViewModel())
+        AddExpenseButtonView(expenseVM: ExpenseDateRangeViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

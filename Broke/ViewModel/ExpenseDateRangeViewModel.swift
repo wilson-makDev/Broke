@@ -35,14 +35,12 @@ class ExpenseDateRangeViewModel: ExpenseViewModel {
     }
     
     func changeDateRange(from: Date) {
-        print("CHANGED FROM")
         self.dateRange.from = from
         self.updateFetchString()
         self.fetchExpenseData()
     }
     
     func changeDateRange(to: Date) {
-        print("CHANGED TO")
         self.dateRange.to = to
         self.updateFetchString()
         self.fetchExpenseData()

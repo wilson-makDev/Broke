@@ -67,13 +67,6 @@ struct AddExpenseView: View {
                         DatePicker("Purchased On:", selection: $dateCreated, displayedComponents: [.date])
                     }
                     Button("Add Expense") {
-                        let expense = Expense(context: context)
-                        expense.name = name
-                        expense.details = description
-                        expense.category = category
-                        expense.amount = amount
-                        expense.dateCreated = Date()
-                        
                         expenseVM.addExpesnse(name: name, details: description, category: category, amount: amount)
 
                         resetInputs()
@@ -93,16 +86,11 @@ struct AddExpenseView: View {
         amount = 0.00
         category = "Bills"
         dateCreated = Date()
-        
-        print(context.registeredObjects.count)
-        context.registeredObjects.forEach { expense in
-            print(expense)
-        }
     }
 }
 
 struct AddExpenseView_Previews: PreviewProvider {
     static var previews: some View {
-        AddExpenseView(expenseVM: ExpenseDateRangeViewModel())
+        AddExpenseView(expenseVM: ExpenseDateRangeViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

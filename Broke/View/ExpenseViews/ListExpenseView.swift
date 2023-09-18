@@ -8,15 +8,16 @@
 import SwiftUI
 
 struct ListExpenseView: View {
-    @ObservedObject var expenseVM: ExpenseDateRangeViewModel
+    var expenses: [Expense]
     
     var body: some View {
-        List(expenseVM.expenseArray) { expense in
-            RowExpenseView(expense: expense)
-                .listRowSeparator(.hidden) //Not getting new data here
+        ScrollView {
+            ForEach(expenses) { expense in
+                RowExpenseView(expense: expense)
+            }
         }
-        .listStyle(.inset)
-        .animation(.easeIn, value: expenseVM.expenseArray.count)
+        .animation(.easeIn, value: expenses.count)
+        .scrollIndicators(.visible)
     }
 }
 
@@ -24,6 +25,6 @@ struct ListExpenseView_Previews: PreviewProvider {
     static let expenseVM = ExpenseDateRangeViewModel()
     
     static var previews: some View {
-        ListExpenseView(expenseVM: expenseVM).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ListExpenseView(expenses: expenseVM.expenseArray).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

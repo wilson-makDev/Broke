@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RowExpenseView: View {
-    @ObservedObject var expense: Expense
+    var expense: Expense
     @State private var opened = false
     
     var body: some View {
@@ -46,7 +46,7 @@ struct RowExpenseView: View {
 struct RowExpenseView_Previews: PreviewProvider {
     
     static let context = PersistenceController.preview.container.viewContext
-    static var expense = Expense.previewAll(context: context).first ?? Expense(context: context)
+    static var expense = ExpenseDateRangeViewModel().expenseArray.first!
     
     static var previews: some View {
         RowExpenseView(expense: self.expense)
