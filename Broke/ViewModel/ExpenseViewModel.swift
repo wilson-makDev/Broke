@@ -10,10 +10,11 @@ import CoreData
 
 class ExpenseViewModel: ObservableObject {
     private static let viewContent = PersistenceController.preview.container.viewContext
-    
     private static var request = NSFetchRequest<Expense>(entityName: "Expense")
     
-    @Published var expenseArray: [Expense] = []
+    var categoryVM = CategoryViewModel()
+    
+    @Published private(set) var expenseArray: [Expense] = []
     
     init() {
         Self.request.sortDescriptors = [NSSortDescriptor(key: "dateCreated", ascending: false)]
@@ -36,7 +37,7 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     
-    func addExpesnse(name: String, details: String, category: String, amount: Float, date: Date) {
+    func addExpesnse(name: String, details: String, category: Category, amount: Float, date: Date) {
         let expense = Expense(context: Self.viewContent)
         expense.dateCreated = date
         expense.name = name

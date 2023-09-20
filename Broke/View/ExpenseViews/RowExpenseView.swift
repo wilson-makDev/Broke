@@ -22,7 +22,7 @@ struct RowExpenseView: View {
             Spacer()
             
             HStack {
-                Text(expense.category ?? "")
+                Text(showCategoryLabel(name: expense.category?.name))
                 Spacer()
                 Text(expense.dateCreated?.formatted(date: .abbreviated, time: .omitted) ?? "")
             }
@@ -32,13 +32,22 @@ struct RowExpenseView: View {
                 Text(expense.details!).padding(.vertical)
             }
         }
+        .foregroundColor(.white)
         .padding()
-        .foregroundColor(.accentColor)
-        .background(.yellow)
+        .border(Color.black, width: 5)
+        .background(CategoryViewModel.CategoryColor.getSwiftColor(of: expense.category!))
         .cornerRadius(10)
         .animation(.easeInOut, value: opened)
         .onTapGesture {
             opened.toggle()
+        }
+    }
+    
+    private func showCategoryLabel(name: String?) -> String {
+        if let safeName = name {
+            return CategoryViewModel.DEFAULT_CATEGORY_NAME == safeName ? "" : safeName
+        } else {
+            return ""
         }
     }
 }

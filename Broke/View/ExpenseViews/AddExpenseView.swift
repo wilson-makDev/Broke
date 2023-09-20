@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct AddExpenseView: View {
-    @State private var categories = ["Bills", "Alcohol"]
-    
     @State private var name : String = ""
     @State private var description : String = ""
     @State private var amount : Float = 0.00
-    @State private var category: String = "Bills"
-    @State private var newCategory: String = ""
+    @State private var categoryName: String = CategoryViewModel.DEFAULT_CATEGORY_NAME
+    @State private var newCategoryName: String = ""
     @State private var dateCreated = Date()
+    @State private var categoryColor = Color(red: 0, green: 0, blue: 0)
     
     @ObservedObject var expenseVM: ExpenseViewModel
     
@@ -26,7 +25,6 @@ struct AddExpenseView: View {
     var body: some View {
         NavigationView {
             VStack {
-                Text("Add Expense")
                 Form {
                     Section("Name") {
                         TextField(text: $name) {
@@ -42,37 +40,45 @@ struct AddExpenseView: View {
                     }
                     Section("Category") {
                         VStack {
-                            Picker("Category", selection: $category) {
-                                ForEach(categories, id: \.self) { item in
+                            Picker("Category", selection: $categoryName) {
+                                ForEach(expenseVM.categoryVM.getCategoryNames(), id: \.self) { item in
                                     Text(item)
                                 }
                             }
-                            .disabled(!newCategory.isEmpty)
+                            .disabled(!newCategoryName.isEmpty)
                             
-                            Divider()
-                            TextField(text: $newCategory) {
-                                Text("New Category")
+                            Divider().padding(.bottom)
+                            HStack {
+                                TextField(text: $newCategoryName) {
+                                    Text("New Category")
+                                }
+                                ColorPicker(selection: $categoryColor, supportsOpacity: false) {
+                                    Text("")
+                                }.hidden()
                             }
                             Button("Add") {
-                                if !newCategory.isEmpty {
-                                    categories.append(newCategory)
-                                    category = newCategory
-                                    newCategory = ""
-                                }
+                                expenseVM.categoryVM.addCategory(called: newCategoryName, color: CategoryViewModel.CategoryColor(color: categoryColor))
+                                
+                                categoryName = newCategoryName
+                                newCategoryName = ""
                             }
+                            .disabled(newCategoryName.isEmpty)
                         }
                         .buttonStyle(.borderless)
                     }
+                    
                     Section("Date") {
                         DatePicker("Purchased On:", selection: $dateCreated, displayedComponents: [.date])
                     }
                     Button("Add Expense") {
-                        expenseVM.addExpesnse(name: name, details: description, category: category, amount: amount, date: dateCreated)
+                        let category = expenseVM.categoryVM.getCategoryByName(categoryName)
+                        expenseVM.addExpesnse(name: name, details: description, category: category!, amount: amount, date: dateCreated)
 
                         resetInputs()
                     }.disabled(!validExpense())
                 }
             }
+            .navigationTitle("Add Expense")
         }
     }
     
@@ -84,7 +90,7 @@ struct AddExpenseView: View {
         name = ""
         description = ""
         amount = 0.00
-        category = "Bills"
+        categoryName = CategoryViewModel.DEFAULT_CATEGORY_NAME
         dateCreated = Date()
     }
 }

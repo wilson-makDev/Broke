@@ -7,17 +7,24 @@
 
 import Foundation
 import CoreData
+import SwiftUI
 
 class CategoryViewModel: ObservableObject {
     private static let viewContext = PersistenceController.preview.container.viewContext
     
     private static var request = NSFetchRequest<Category>(entityName: "Category")
     
+    static let DEFAULT_CATEGORY_NAME = "None"
+    
     @Published var categoryOptionsArray: [Category] = []
     
     init() {
         Self.request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         fetchCategoryData()
+        
+        if !self.hasCategoryWithName(Self.DEFAULT_CATEGORY_NAME) {
+            self.addCategory(called: Self.DEFAULT_CATEGORY_NAME, color: CategoryColor(color: .black))
+        }
     }
     
     func fetchCategoryData() {
@@ -36,13 +43,48 @@ class CategoryViewModel: ObservableObject {
         }
     }
     
-    func addCategory(name: String, color: CategoryColor) {
-        var newCategory = Category(context: Self.viewContext)
-        newCategory.name = name
-        (newCategory.r, newCategory.g, newCategory.b) = color.getInt16ColorTuple()
+    func getCategoryNames() -> [String] {
+        return categoryOptionsArray.map { category in
+            category.name!
+        }
+    }
+    
+    //Returned category cannot be modifed
+    func getCategoryByName(_ name: String) -> Category? {
+        return categoryOptionsArray.first { category in
+            category.name == name
+        }
+    }
+    
+    private func hasCategoryWithName(_ name: String) -> Bool {
+        categoryOptionsArray.contains(where: { category in category.name == name.capitalized })
+    }
+    
+    func addCategory(called name: String, color: CategoryColor) {
+        if !self.hasCategoryWithName(name) {
+            let newCategory = Category(context: Self.viewContext)
+            newCategory.name = name.capitalized
+            
+            (newCategory.r, newCategory.g, newCategory.b) = color.getInt16ColorTuple()
+            
+            self.save()
+            self.fetchCategoryData()
+        }
+    }
+    
+    func changeCategoryColour(name: String, color: CategoryColor) -> Bool {
+        if !self.hasCategoryWithName(name) {
+            return false
+        }
+        
+        if let categoryToChange = categoryOptionsArray.first(where: { category in category.name == name.lowercased() }) {
+            (categoryToChange.r, categoryToChange.g, categoryToChange.b) = color.getInt16ColorTuple()
+        }
         
         self.save()
         self.fetchCategoryData()
+        
+        return true
     }
     
     struct CategoryColor {
@@ -50,8 +92,18 @@ class CategoryViewModel: ObservableObject {
         var g: UInt8 = 0
         var b: UInt8 = 0
         
+        init(color: Color) {
+            r = UInt8(color.cgColor!.components![0])
+            g = UInt8(color.cgColor!.components![1])
+            b = UInt8(color.cgColor!.components![2])
+        }
+        
         func getColorTuple() -> (r: UInt8, g: UInt8, b: UInt8) {
             (r, g, b)
+        }
+        
+        static func getSwiftColor(of category: Category) -> Color {
+            Color(red: Double(category.r), green: Double(category.g), blue: Double(category.b))
         }
         
         func getInt16ColorTuple() -> (Int16, Int16, Int16) {
