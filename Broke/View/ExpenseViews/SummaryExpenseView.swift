@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SummaryExpenseView: View {
     @ObservedObject var expenseVM: ExpenseViewModel
+    @State var selectedExpense: Expense? = nil
     
     var body: some View {
         VStack(alignment: .center) {
@@ -21,7 +22,7 @@ struct SummaryExpenseView: View {
                 Text("Wow no expenses here!").font(.title3)
                 Spacer()
             } else {
-                ListExpenseView(expenses: expenseVM.expenseArray)
+                ListExpenseView(expenseVM: expenseVM)
                     .padding()
             }
 

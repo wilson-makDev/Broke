@@ -34,9 +34,7 @@ struct RowExpenseView: View {
         }
         .foregroundColor(.white)
         .padding()
-        .border(Color.black, width: 5)
         .background(CategoryViewModel.CategoryColor.getSwiftColor(of: expense.category!))
-        .cornerRadius(10)
         .animation(.easeInOut, value: opened)
         .onTapGesture {
             opened.toggle()
@@ -55,10 +53,9 @@ struct RowExpenseView: View {
 struct RowExpenseView_Previews: PreviewProvider {
     
     static let context = PersistenceController.preview.container.viewContext
-    static var expense = ExpenseViewModel().expenseArray.first!
     
     static var previews: some View {
-        RowExpenseView(expense: self.expense)
+        RowExpenseView(expense: ExpenseViewModel().expenseArray.first!)
             .frame(maxWidth: 350, maxHeight: 100)
     }
 }

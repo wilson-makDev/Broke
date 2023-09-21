@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 
 class ExpenseViewModel: ObservableObject {
-    private static let viewContent = PersistenceController.preview.container.viewContext
-    private static var request = NSFetchRequest<Expense>(entityName: "Expense")
+    private static let viewContent = PersistenceController.preview.container.viewContext //TODO:Change to proper container
+    private static var request = Expense.fetchRequest()
     
     var categoryVM = CategoryViewModel()
     
@@ -37,7 +37,7 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     
-    func addExpesnse(name: String, details: String, category: Category, amount: Float, date: Date) {
+    func addExpense(name: String, details: String, category: Category, amount: Float, date: Date) {
         let expense = Expense(context: Self.viewContent)
         expense.dateCreated = date
         expense.name = name
@@ -45,6 +45,12 @@ class ExpenseViewModel: ObservableObject {
         expense.category = category
         expense.amount = amount
         
+        self.save()
+        self.fetchExpenseData()
+    }
+    
+    func deleteExpense(_ expense: Expense) {
+        Self.viewContent.delete(expense)
         self.save()
         self.fetchExpenseData()
     }

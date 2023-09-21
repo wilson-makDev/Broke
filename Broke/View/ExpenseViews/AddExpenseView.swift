@@ -20,8 +20,6 @@ struct AddExpenseView: View {
     
     private let currencyFormat = CurrencyFormater()
     
-    @Environment(\.managedObjectContext) var context
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -72,7 +70,7 @@ struct AddExpenseView: View {
                     }
                     Button("Add Expense") {
                         let category = expenseVM.categoryVM.getCategoryByName(categoryName)
-                        expenseVM.addExpesnse(name: name, details: description, category: category!, amount: amount, date: dateCreated)
+                        expenseVM.addExpense(name: name, details: description, category: category!, amount: amount, date: dateCreated)
 
                         resetInputs()
                     }.disabled(!validExpense())

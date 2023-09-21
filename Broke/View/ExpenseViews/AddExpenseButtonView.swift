@@ -22,7 +22,7 @@ struct AddExpenseButtonView: View {
         .padding()
         .foregroundColor(.white)
         .background(.black)
-        .cornerRadius(10)
+        .cornerRadius(5)
     }
 }
 

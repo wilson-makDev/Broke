@@ -8,19 +8,31 @@
 import SwiftUI
 
 struct ListExpenseView: View {
-    var expenses: [Expense]
+    @ObservedObject var expenseVM: ExpenseViewModel
     
     var body: some View {
         VStack(alignment: .trailing) {
             Text("Recent").font(.subheadline)
-            ScrollView {
-                ForEach(expenses) { expense in
+            List {
+                ForEach(expenseVM.expenseArray) { expense in
                     RowExpenseView(expense: expense)
+                        .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                            Button(role: .destructive) {
+                                expenseVM.deleteExpense(expense)
+                            } label: {
+                                Text("Delete")
+                            }
+                        }
+                        .listRowSeparator(.hidden)
+                        .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 4, trailing: 0))
+                        .cornerRadius(5)
                 }
             }
-            .animation(.easeIn, value: expenses.count)
+            .listStyle(.plain)
+            .animation(.easeIn, value: expenseVM.expenseArray.count)
             .scrollIndicators(.visible)
         }
+        .padding(.horizontal, 1)
     }
 }
 
@@ -28,6 +40,6 @@ struct ListExpenseView_Previews: PreviewProvider {
     static let expenseVM = ExpenseViewModel()
     
     static var previews: some View {
-        ListExpenseView(expenses: expenseVM.expenseArray).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ListExpenseView(expenseVM: expenseVM).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }

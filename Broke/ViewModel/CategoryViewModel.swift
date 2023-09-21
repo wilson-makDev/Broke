@@ -10,9 +10,9 @@ import CoreData
 import SwiftUI
 
 class CategoryViewModel: ObservableObject {
-    private static let viewContext = PersistenceController.preview.container.viewContext
+    private static let viewContext = PersistenceController.preview.container.viewContext //TODO:Change to proper container
     
-    private static var request = NSFetchRequest<Category>(entityName: "Category")
+    private static var request = Category.fetchRequest()
     
     static let DEFAULT_CATEGORY_NAME = "None"
     
