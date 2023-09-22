@@ -15,7 +15,7 @@ struct ListExpenseView: View {
             Text("Recent").font(.subheadline)
             List {
                 ForEach(expenseVM.expenseArray) { expense in
-                    RowExpenseView(expense: expense)
+                    RowExpenseView(expense: expense, expenseVM: expenseVM)
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {
                                 expenseVM.deleteExpense(expense)

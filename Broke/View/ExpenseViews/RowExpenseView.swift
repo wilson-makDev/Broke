@@ -10,35 +10,39 @@ import SwiftUI
 struct RowExpenseView: View {
     var expense: Expense
     @State private var opened = false
+    @State private var isActive = false
+    
+    @ObservedObject var expenseVM: ExpenseViewModel
     
     var body: some View {
-        VStack(alignment: .leading) {
-            HStack {
-                Text(expense.name ?? "").font(.headline)
+        NavigationLink {
+            FormExpenseView(edit: expense, expenseVM: expenseVM)
+        } label: {
+            VStack(alignment: .leading) {
+                HStack {
+                    Text(expense.name ?? "").font(.headline)
+                    Spacer()
+                    Text(CurrencyFormater().numberFormatter.string(for: expense.amount) ?? "$0.00").font(.title)
+                }
+                
                 Spacer()
-                Text(CurrencyFormater().numberFormatter.string(for: expense.amount) ?? "$0.00").font(.title)
-            }
-            
-            Spacer()
-            
-            HStack {
-                Text(showCategoryLabel(name: expense.category?.name))
-                Spacer()
-                Text(expense.dateCreated?.formatted(date: .abbreviated, time: .omitted) ?? "")
-            }
-            
-            if opened && !(expense.details ?? "").isEmpty {
-                Divider()
-                Text(expense.details!).padding(.vertical)
+                
+                HStack {
+                    Text(showCategoryLabel(name: expense.category?.name))
+                    Spacer()
+                    Text(expense.dateCreated?.formatted(date: .abbreviated, time: .omitted) ?? "")
+                }
+                
+                if opened && !(expense.details ?? "").isEmpty {
+                    Divider()
+                    Text(expense.details!).padding(.vertical)
+                }
             }
         }
         .foregroundColor(.white)
         .padding()
-        .background(CategoryViewModel.CategoryColor.getSwiftColor(of: expense.category!))
+        .background(expense.category == nil ? .black : CategoryViewModel.CategoryColor.getSwiftColor(of: expense.category!))
         .animation(.easeInOut, value: opened)
-        .onTapGesture {
-            opened.toggle()
-        }
     }
     
     private func showCategoryLabel(name: String?) -> String {
@@ -52,10 +56,10 @@ struct RowExpenseView: View {
 
 struct RowExpenseView_Previews: PreviewProvider {
     
-    static let context = PersistenceController.preview.container.viewContext
+    static var expenseVM = ExpenseViewModel()
     
     static var previews: some View {
-        RowExpenseView(expense: ExpenseViewModel().expenseArray.first!)
+        RowExpenseView(expense: expenseVM.expenseArray.first!, expenseVM: expenseVM)
             .frame(maxWidth: 350, maxHeight: 100)
     }
 }

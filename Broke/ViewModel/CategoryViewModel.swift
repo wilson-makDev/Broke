@@ -45,7 +45,11 @@ class CategoryViewModel: ObservableObject {
     
     func getCategoryNames() -> [String] {
         return categoryOptionsArray.map { category in
-            category.name!
+            if let safeName = category.name {
+                return safeName
+            } else {
+                return "Unavailable"
+            }
         }
     }
     

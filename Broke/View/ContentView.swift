@@ -14,7 +14,7 @@ struct ContentView: View {
     var toDate: Date
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
                 SummaryExpenseView(expenseVM: expenseVM)
                 DateRangePickerView(expenseVM: expenseVM, fromDate: fromDate, toDate: toDate)

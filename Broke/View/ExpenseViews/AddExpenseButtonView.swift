@@ -13,7 +13,7 @@ struct AddExpenseButtonView: View {
     
     var body: some View {
         NavigationLink {
-            AddExpenseView(expenseVM: expenseVM)
+            FormExpenseView(expenseVM: expenseVM)
         } label: {
             Image(systemName: "plus.circle")
                 .imageScale(.large)

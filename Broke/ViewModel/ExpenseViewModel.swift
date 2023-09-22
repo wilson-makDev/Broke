@@ -21,7 +21,7 @@ class ExpenseViewModel: ObservableObject {
         fetchExpenseData()
     }
     
-    func fetchExpenseData() {
+    private func fetchExpenseData() {
         do {
             expenseArray = try Self.viewContent.fetch(Self.request)
         } catch {
@@ -29,7 +29,7 @@ class ExpenseViewModel: ObservableObject {
         }
     }
     
-    func save() {
+    private func save() {
         do {
             try Self.viewContent.save()
         } catch {
@@ -47,6 +47,21 @@ class ExpenseViewModel: ObservableObject {
         
         self.save()
         self.fetchExpenseData()
+    }
+    
+    func updateExpense(orignalExpense: Expense, name: String, details: String, category: Category, amount: Float, date: Date) {
+        if let indexOf = expenseArray.firstIndex(of: orignalExpense) {
+            expenseArray[indexOf].name = name
+            expenseArray[indexOf].details = details
+            expenseArray[indexOf].category = category
+            expenseArray[indexOf].amount = amount
+            expenseArray[indexOf].dateCreated = date
+            
+            self.save()
+            self.fetchExpenseData()
+        } else {
+            print("UpdateExpense can not find expense: \(orignalExpense)")
+        }
     }
     
     func deleteExpense(_ expense: Expense) {

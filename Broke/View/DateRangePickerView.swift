@@ -16,11 +16,11 @@ struct DateRangePickerView: View {
         VStack {
             Text("Date Range").font(.headline)
             HStack {
-                DatePicker("From:", selection: $fromDate , displayedComponents: [.date])
+                DatePicker("From", selection: $fromDate , displayedComponents: [.date])
                     .onChange(of: fromDate) { newFromDate in
                         expenseVM.changeDateRange(newFromDate, toDate)
                     }
-                DatePicker("To:", selection: $toDate, displayedComponents: [.date])
+                DatePicker("To", selection: $toDate, displayedComponents: [.date])
                     .onChange(of: toDate) { newToDate in
                         expenseVM.changeDateRange(fromDate, newToDate)
                     }
