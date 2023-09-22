@@ -9,10 +9,10 @@ import Foundation
 import CoreData
 
 class ExpenseViewModel: ObservableObject {
-    private static let viewContent = PersistenceController.preview.container.viewContext //TODO:Change to proper container
+    private static let viewContent = PersistenceController().container.viewContext //TODO:Change to proper container
     private static var request = Expense.fetchRequest()
     
-    var categoryVM = CategoryViewModel()
+    var categoryVM = CategoryViewModel(viewContext: viewContent)
     
     @Published private(set) var expenseArray: [Expense] = []
     

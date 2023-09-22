@@ -10,7 +10,7 @@ import CoreData
 import SwiftUI
 
 class CategoryViewModel: ObservableObject {
-    private static let viewContext = PersistenceController.preview.container.viewContext //TODO:Change to proper container
+    private let viewContext: NSManagedObjectContext
     
     private static var request = Category.fetchRequest()
     
@@ -18,7 +18,8 @@ class CategoryViewModel: ObservableObject {
     
     @Published var categoryOptionsArray: [Category] = []
     
-    init() {
+    init(viewContext: NSManagedObjectContext) {
+        self.viewContext = viewContext
         Self.request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         fetchCategoryData()
         
@@ -29,7 +30,7 @@ class CategoryViewModel: ObservableObject {
     
     func fetchCategoryData() {
         do {
-            categoryOptionsArray = try Self.viewContext.fetch(Self.request)
+            categoryOptionsArray = try viewContext.fetch(Self.request)
         } catch {
             print("CategoryViewModel fetching error: [\(error)]")
         }
@@ -37,7 +38,7 @@ class CategoryViewModel: ObservableObject {
     
     func save() {
         do {
-            try Self.viewContext.save()
+            try viewContext.save()
         } catch {
             print("ExpenseViewModel saving error: [\(error)]")
         }
@@ -66,7 +67,7 @@ class CategoryViewModel: ObservableObject {
     
     func addCategory(called name: String, color: CategoryColor) {
         if !self.hasCategoryWithName(name) {
-            let newCategory = Category(context: Self.viewContext)
+            let newCategory = Category(context: viewContext)
             newCategory.name = name.capitalized
             
             (newCategory.r, newCategory.g, newCategory.b) = color.getInt16ColorTuple()
