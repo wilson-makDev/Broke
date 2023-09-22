@@ -39,9 +39,9 @@ struct RowExpenseView: View {
                 }
             }
         }
-        .foregroundColor(.white)
+        .foregroundColor(Color("ExpenseTextColor"))
         .padding()
-        .background(expense.category == nil ? .black : CategoryViewModel.CategoryColor.getSwiftColor(of: expense.category!))
+        .background(Color("ExpenseColor"))
         .animation(.easeInOut, value: opened)
     }
     

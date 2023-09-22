@@ -29,74 +29,73 @@ struct FormExpenseView: View {
     }
     
     var body: some View {
-        NavigationView {
-            VStack {
-                Form {
-                    Section("Name") {
-                        TextField(text: $expenseData.name) {
-                            Text("Required")
-                        }
+
+        VStack {
+            Form {
+                Section("Name") {
+                    TextField(text: $expenseData.name) {
+                        Text("Required")
                     }
-                    Section("Description") {
-                        TextEditor(text: $expenseData.details)
-                    }
-                    Section("Amount") {
-                        TextField("$0.00", value: $expenseData.amount, formatter: currencyFormat.numberFormatter)
-                            .keyboardType(.numberPad)
-                    }
-                    Section("Category") {
-                        VStack {
-                            Picker("Category", selection: $expenseData.categoryName) {
-                                ForEach(expenseVM.categoryVM.getCategoryNames(), id: \.self) { item in
-                                    Text(item)
-                                }
+                }
+                Section("Description") {
+                    TextEditor(text: $expenseData.details)
+                }
+                Section("Amount") {
+                    TextField("$0.00", value: $expenseData.amount, formatter: currencyFormat.numberFormatter)
+                        .keyboardType(.numberPad)
+                }
+                Section("Category") {
+                    VStack {
+                        Picker("Category", selection: $expenseData.categoryName) {
+                            ForEach(expenseVM.categoryVM.getCategoryNames(), id: \.self) { item in
+                                Text(item)
                             }
-                            .disabled(!newCategoryName.isEmpty)
-                            
-                            Divider().padding(.bottom)
-                            HStack {
-                                TextField(text: $newCategoryName) {
-                                    Text("New Category")
-                                }
-                                //TODO: Implement Color picker
+                        }
+                        .disabled(!newCategoryName.isEmpty)
+                        
+                        Divider().padding(.bottom)
+                        HStack {
+                            TextField(text: $newCategoryName) {
+                                Text("New Category")
+                            }
+                            //TODO: Implement Color picker
 //                                ColorPicker(selection: $categoryColor, supportsOpacity: false) {
 //                                    Text("")
 //                                }.hidden()
-                            }
-                            Button("Add") {
-                                expenseVM.categoryVM.addCategory(called: newCategoryName, color: CategoryViewModel.CategoryColor(color: expenseData.categoryColor))
-                                
-                                expenseData.categoryName = newCategoryName
-                                newCategoryName = ""
-                            }
-                            .disabled(newCategoryName.isEmpty)
                         }
-                        .buttonStyle(.borderless)
-                    }
-                    
-                    Section("Date") {
-                        DatePicker("Purchased On:", selection: $expenseData.dateCreated, displayedComponents: [.date])
-                    }
-
-                    Button(role.getButtonText()) {
-                        if let category = expenseVM.categoryVM.getCategoryByName(expenseData.categoryName) {
-                            switch role {
-                            case .add:
-                                expenseVM.addExpense(name: expenseData.name, details: expenseData.details, category: category, amount: expenseData.amount, date: expenseData.dateCreated)
-                            case .edit(let orignal):
-                                expenseVM.updateExpense(orignalExpense: orignal, name: expenseData.name, details: expenseData.details, category: category, amount: expenseData.amount, date: expenseData.dateCreated)
-                            }
-
-                            expenseData.resetInputs()
-                            self.presentation.wrappedValue.dismiss()
-                        } else {
-                            print("FormExpenseView cannot add/edit, category not found")
+                        Button("Add") {
+                            expenseVM.categoryVM.addCategory(called: newCategoryName, color: CategoryViewModel.CategoryColor(color: expenseData.categoryColor))
+                            
+                            expenseData.categoryName = newCategoryName
+                            newCategoryName = ""
                         }
-                    }.disabled(!expenseData.validExpense())
+                        .disabled(newCategoryName.isEmpty)
+                    }
+                    .buttonStyle(.borderless)
                 }
+                
+                Section("Date") {
+                    DatePicker("Purchased On:", selection: $expenseData.dateCreated, displayedComponents: [.date])
+                }
+
+                Button(role.getButtonText()) {
+                    if let category = expenseVM.categoryVM.getCategoryByName(expenseData.categoryName) {
+                        switch role {
+                        case .add:
+                            expenseVM.addExpense(name: expenseData.name, details: expenseData.details, category: category, amount: expenseData.amount, date: expenseData.dateCreated)
+                        case .edit(let orignal):
+                            expenseVM.updateExpense(orignalExpense: orignal, name: expenseData.name, details: expenseData.details, category: category, amount: expenseData.amount, date: expenseData.dateCreated)
+                        }
+
+                        expenseData.resetInputs()
+                        self.presentation.wrappedValue.dismiss()
+                    } else {
+                        print("FormExpenseView cannot add/edit, category not found")
+                    }
+                }.disabled(!expenseData.validExpense())
             }
-            .navigationTitle(role.getTitle())
         }
+        .navigationTitle(role.getTitle())
     }
 }
 

@@ -20,8 +20,8 @@ struct AddExpenseButtonView: View {
                 .frame(minWidth: 200)
         }
         .padding()
-        .foregroundColor(.white)
-        .background(.black)
+        .foregroundColor(Color("ExpenseTextColor"))
+        .background(Color("ExpenseColor"))
         .cornerRadius(5)
     }
 }

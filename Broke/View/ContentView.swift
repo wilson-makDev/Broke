@@ -20,6 +20,7 @@ struct ContentView: View {
                 DateRangePickerView(expenseVM: expenseVM, fromDate: fromDate, toDate: toDate)
             }
         }
+        .background(Color("Background"))
     }
 }
 

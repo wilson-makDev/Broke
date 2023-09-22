@@ -51,7 +51,7 @@ struct ExpenseFormData {
     }
     
     func validExpense() -> Bool {
-        return !name.isEmpty && !details.isEmpty && !dateCreated.description.isEmpty
+        return !name.isEmpty && !dateCreated.description.isEmpty
     }
     
     mutating func resetInputs() {

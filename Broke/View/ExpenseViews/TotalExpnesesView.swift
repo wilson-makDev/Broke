@@ -14,7 +14,7 @@ struct TotalExpenesesView: View {
         HStack {
             Text("Total Expenses:")
             Spacer()
-            Text(expenseVM.getTotalCostString()).foregroundColor(.init(red: 0, green: 0, blue: 0)).bold()
+            Text(expenseVM.getTotalCostString()).foregroundColor(Color("ExpenseTotalTextColor")).bold()
         }.font(.title).padding()
     }
 }
