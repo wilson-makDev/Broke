@@ -14,11 +14,12 @@ struct SummaryExpenseView: View {
     var body: some View {
         VStack(alignment: .center) {
             Text("Expenses").font(.title)
-            Spacer(minLength: 100)
+            Rectangle().fill((Color("Background"))).frame(height: 150)
             TotalExpenesesView(expenseVM: expenseVM)
             
+            Spacer()
+            
             if expenseVM.expenseArray.isEmpty {
-                Spacer()
                 Text("Wow no expenses here!").font(.title3)
                 Spacer()
             } else {
@@ -27,7 +28,7 @@ struct SummaryExpenseView: View {
             }
 
             AddExpenseButtonView(expenseVM: expenseVM)
-        }
+        }.animation(.default, value: expenseVM.expenseArray.isEmpty)
     }
 }
 
