@@ -7,8 +7,7 @@
 
 import SwiftUI
 
-struct FormExpenseView: View {    
-    @State private var newCategoryName: String = ""
+struct FormExpenseView: View {
     @State private var expenseData: ExpenseFormData = ExpenseFormData()
     @ObservedObject var expenseVM: ExpenseViewModel
     
@@ -45,47 +44,7 @@ struct FormExpenseView: View {
                         .keyboardType(.numberPad)
                 }
                 Section("Category") {
-                    VStack {
-                        Picker("Category", selection: $expenseData.category) {
-                            ForEach(expenseVM.categoryVM.categoryOptionsArray) { item in
-                                if let safeName = item.name {
-                                    Text(safeName).tag(CategoryFormData(category: item))
-                                }
-                                
-                            }
-                        }
-                        .disabled(!newCategoryName.isEmpty)
-                        
-                        Divider().padding()
-                        
-                        HStack {
-                            ColorPicker(selection: $expenseData.category.categoryBackgroundColor, supportsOpacity: false) {
-                                Text("Background")
-                            }
-                            ColorPicker(selection: $expenseData.category.categoryTextColor, supportsOpacity: false) {
-                                Text("Text")
-                            }
-                        }
-                        
-                        Divider().padding()
-                        
-                        TextField(text: $newCategoryName) {
-                            Text("New Category")
-                        }
-      
-                        Button("Add") {
-                            expenseVM.categoryVM.addCategory(
-                                called: newCategoryName,
-                                backgroundColor: expenseData.category.categoryBackgroundColor.toHexString(),
-                                textColor: expenseData.category.categoryTextColor.toHexString()
-                            )
-                            
-                            expenseData.category.categoryName = newCategoryName
-                            newCategoryName = ""
-                        }
-                        .disabled(newCategoryName.isEmpty)
-                    }
-                    .buttonStyle(.borderless)
+                    CategoryPickerView(expenseVM: expenseVM, categoryData: expenseData.category)
                 }
                 
                 Section("Date") {

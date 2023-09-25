@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C116847D2ABF722800403EEE /* Color+RGBComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = C116847C2ABF722800403EEE /* Color+RGBComponents.swift */; };
 		C11684802AC1F5DB00403EEE /* CategoryFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C116847F2AC1F5DB00403EEE /* CategoryFormData.swift */; };
+		C11684862AC21C2500403EEE /* CategoryPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11684852AC21C2500403EEE /* CategoryPickerView.swift */; };
 		C153558B2AAE6E1C00E9AEAE /* FormExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C153558A2AAE6E1C00E9AEAE /* FormExpenseView.swift */; };
 		C15355922AAE8D1900E9AEAE /* CurrencyFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15355912AAE8D1900E9AEAE /* CurrencyFormatter.swift */; };
 		C163756B2AAB9CAA00C8A7A4 /* BrokeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C163756A2AAB9CAA00C8A7A4 /* BrokeApp.swift */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		C116847C2ABF722800403EEE /* Color+RGBComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+RGBComponents.swift"; sourceTree = "<group>"; };
 		C116847F2AC1F5DB00403EEE /* CategoryFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFormData.swift; sourceTree = "<group>"; };
+		C11684852AC21C2500403EEE /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
 		C153558A2AAE6E1C00E9AEAE /* FormExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormExpenseView.swift; sourceTree = "<group>"; };
 		C15355912AAE8D1900E9AEAE /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
 		C16375672AAB9CAA00C8A7A4 /* Broke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Broke.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,6 +220,7 @@
 				C1C947332ABE261200B07E27 /* ExpenseFormData.swift */,
 				C153558A2AAE6E1C00E9AEAE /* FormExpenseView.swift */,
 				C116847F2AC1F5DB00403EEE /* CategoryFormData.swift */,
+				C11684852AC21C2500403EEE /* CategoryPickerView.swift */,
 			);
 			path = FormExpenseViews;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 				C16375742AAB9CAC00C8A7A4 /* Persistence.swift in Sources */,
 				C15355922AAE8D1900E9AEAE /* CurrencyFormatter.swift in Sources */,
 				C1B54C5D2AB354E900DFB867 /* ExpenseViewModel.swift in Sources */,
+				C11684862AC21C2500403EEE /* CategoryPickerView.swift in Sources */,
 				C1B54C562AB252D300DFB867 /* ListExpenseView.swift in Sources */,
 				C1C947342ABE261200B07E27 /* ExpenseFormData.swift in Sources */,
 				C16375772AAB9CAC00C8A7A4 /* Broke.xcdatamodeld in Sources */,
