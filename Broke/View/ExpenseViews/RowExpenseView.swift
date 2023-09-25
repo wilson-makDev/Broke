@@ -39,10 +39,18 @@ struct RowExpenseView: View {
                 }
             }
         }
-        .foregroundColor(Color("ExpenseTextColor"))
+        .foregroundColor(getCategoryColor(categoryColorHex: expense.category?.textColor, defaultColor: "ExpenseTextColor"))
         .padding()
-        .background(Color("ExpenseColor"))
+        .background(getCategoryColor(categoryColorHex: expense.category?.backgroundColor, defaultColor: "ExpenseColor"))
         .animation(.easeInOut, value: opened)
+    }
+    
+    private func getCategoryColor(categoryColorHex: String?, defaultColor: String) -> Color {
+        if let safeCategoryHex = categoryColorHex {
+            return Color(hex: safeCategoryHex)
+        } else {
+            return Color(defaultColor)
+        }
     }
     
     private func showCategoryLabel(name: String?) -> String {

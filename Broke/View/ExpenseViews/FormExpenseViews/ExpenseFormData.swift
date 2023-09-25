@@ -32,12 +32,11 @@ enum ExpenseFormRole {
 }
 
 struct ExpenseFormData {
-    var name : String = ""
-    var details : String = ""
+    var name = ""
+    var details = ""
     var amount : Float = 0.00
-    var categoryName: String = CategoryViewModel.DEFAULT_CATEGORY_NAME
     var dateCreated = Date()
-    var categoryColor = Color(red: 0, green: 0, blue: 0)
+    var category = CategoryFormData()
     
     init() {}
     
@@ -45,9 +44,8 @@ struct ExpenseFormData {
         name = expense.name ?? name
         details = expense.details ?? details
         amount = expense.amount
-        categoryName = expense.category?.name ?? categoryName
         dateCreated = expense.dateCreated ?? dateCreated
-        categoryColor = Color(red: 0, green: 0, blue: 0)
+        category = CategoryFormData(category: expense.category)
     }
     
     func validExpense() -> Bool {
@@ -58,7 +56,7 @@ struct ExpenseFormData {
         name = ""
         details = ""
         amount = 0.00
-        categoryName = CategoryViewModel.DEFAULT_CATEGORY_NAME
         dateCreated = Date()
+        category.resetInputs()
     }
 }

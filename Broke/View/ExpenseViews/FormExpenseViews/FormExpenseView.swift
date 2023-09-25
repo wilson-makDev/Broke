@@ -31,7 +31,7 @@ struct FormExpenseView: View {
     var body: some View {
 
         VStack {
-            Form {
+            Form(content: {
                 Section("Name") {
                     TextField(text: $expenseData.name) {
                         Text("Required")
@@ -46,27 +46,41 @@ struct FormExpenseView: View {
                 }
                 Section("Category") {
                     VStack {
-                        Picker("Category", selection: $expenseData.categoryName) {
-                            ForEach(expenseVM.categoryVM.getCategoryNames(), id: \.self) { item in
-                                Text(item)
+                        Picker("Category", selection: $expenseData.category) {
+                            ForEach(expenseVM.categoryVM.categoryOptionsArray) { item in
+                                if let safeName = item.name {
+                                    Text(safeName).tag(CategoryFormData(category: item))
+                                }
+                                
                             }
                         }
                         .disabled(!newCategoryName.isEmpty)
                         
-                        Divider().padding(.bottom)
+                        Divider().padding()
+                        
                         HStack {
-                            TextField(text: $newCategoryName) {
-                                Text("New Category")
+                            ColorPicker(selection: $expenseData.category.categoryBackgroundColor, supportsOpacity: false) {
+                                Text("Background")
                             }
-                            //TODO: Implement Color picker
-//                                ColorPicker(selection: $categoryColor, supportsOpacity: false) {
-//                                    Text("")
-//                                }.hidden()
+                            ColorPicker(selection: $expenseData.category.categoryTextColor, supportsOpacity: false) {
+                                Text("Text")
+                            }
                         }
+                        
+                        Divider().padding()
+                        
+                        TextField(text: $newCategoryName) {
+                            Text("New Category")
+                        }
+      
                         Button("Add") {
-                            expenseVM.categoryVM.addCategory(called: newCategoryName, color: CategoryViewModel.CategoryColor(color: expenseData.categoryColor))
+                            expenseVM.categoryVM.addCategory(
+                                called: newCategoryName,
+                                backgroundColor: expenseData.category.categoryBackgroundColor.toHexString(),
+                                textColor: expenseData.category.categoryTextColor.toHexString()
+                            )
                             
-                            expenseData.categoryName = newCategoryName
+                            expenseData.category.categoryName = newCategoryName
                             newCategoryName = ""
                         }
                         .disabled(newCategoryName.isEmpty)
@@ -79,7 +93,7 @@ struct FormExpenseView: View {
                 }
 
                 Button(role.getButtonText()) {
-                    if let category = expenseVM.categoryVM.getCategoryByName(expenseData.categoryName) {
+                    if let category = expenseVM.categoryVM.getCategoryByName(expenseData.category.categoryName) {
                         switch role {
                         case .add:
                             expenseVM.addExpense(name: expenseData.name, details: expenseData.details, category: category, amount: expenseData.amount, date: expenseData.dateCreated)
@@ -93,7 +107,7 @@ struct FormExpenseView: View {
                         print("FormExpenseView cannot add/edit, category not found")
                     }
                 }.disabled(!expenseData.validExpense())
-            }
+            })
         }
         .navigationTitle(role.getTitle())
     }
