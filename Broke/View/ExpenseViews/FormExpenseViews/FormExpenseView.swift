@@ -41,7 +41,7 @@ struct FormExpenseView: View {
                 }
                 Section("Amount") {
                     TextField("$0.00", value: $expenseData.amount, formatter: currencyFormat.numberFormatter)
-                        .keyboardType(.numberPad)
+                        .keyboardType(.numbersAndPunctuation)
                 }
                 Section("Category") {
                     CategoryPickerView(expenseVM: expenseVM, categoryData: $expenseData.category)
