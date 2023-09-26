@@ -11,76 +11,72 @@ struct CategoryPickerView: View {
     @ObservedObject var expenseVM: ExpenseViewModel
     @State var newCategoryName = ""
     @State var showAddCategoryPrompt = false
-    @State var categoryData = CategoryFormData()
-    
-    init(expenseVM: ExpenseViewModel, categoryData: CategoryFormData) {
-        self.expenseVM = expenseVM
-        self.categoryData = categoryData
-    }
+    @Binding var categoryData: CategoryFormData
     
     var body: some View {
-        HStack {
-            if showAddCategoryPrompt {
-                TextField("Name", text: $newCategoryName)
-                Spacer()
-                Button("Add") {
-                    expenseVM.categoryVM.addCategory(
-                        called: newCategoryName,
-                        backgroundColor: CategoryViewModel.DEFAULT_BACKGROUND_COLOR,
-                        textColor: CategoryViewModel.DEFAULT_TEXT_COLOR
-                    )
+        VStack {
+            HStack {
+                if showAddCategoryPrompt {
+                    TextField("Name", text: $newCategoryName)
+                    Spacer()
+                    Button("Add") {
+                        expenseVM.categoryVM.addCategory(
+                            called: newCategoryName,
+                            backgroundColor: CategoryViewModel.DEFAULT_BACKGROUND_COLOR,
+                            textColor: CategoryViewModel.DEFAULT_TEXT_COLOR
+                        )
 
-                    if let safeCategory = expenseVM.categoryVM.getCategoryByName(newCategoryName) {
-                        categoryData = CategoryFormData(category: safeCategory)
-                    }
-                    newCategoryName = ""
-                    
-                    showAddCategoryPrompt.toggle()
-                }
-                .disabled(newCategoryName.isEmpty)
-                Button("Cancel") {
-                    showAddCategoryPrompt.toggle()
-                }
-            } else {
-                VStack {
-                    Menu(categoryData.categoryName) {
-                        Picker("Category", selection: $categoryData) {
-                            ForEach(expenseVM.categoryVM.categoryOptionsArray) { item in
-                                if let safeName = item.name {
-                                    Text(safeName).tag(CategoryFormData(category: item))
-                                }
-                            }
-                        }.menuOrder(.priority)
+                        if let safeCategory = expenseVM.categoryVM.getCategoryByName(newCategoryName) {
+                            categoryData = CategoryFormData(category: safeCategory)
+                        }
+                        newCategoryName = ""
                         
-                        Button(action: {
-                            showAddCategoryPrompt.toggle()
-                        }, label: {
-                            Text("New Category")
-                        })
-
+                        showAddCategoryPrompt.toggle()
                     }
-                }
-                
-                Spacer()
-                
-                
-                if categoryData.categoryName != CategoryViewModel.DEFAULT_CATEGORY_NAME {
+                    .disabled(newCategoryName.isEmpty)
+                    Button("Cancel") {
+                        showAddCategoryPrompt.toggle()
+                    }
+                } else {
                     VStack {
-                        ColorPicker(selection: $categoryData.categoryBackgroundColor, supportsOpacity: false) {
-                            Text("Background:")
-                        }
-                        ColorPicker(selection: $categoryData.categoryTextColor, supportsOpacity: false) {
-                            Text("Text:")
+                        Menu(categoryData.categoryName) {
+                            Picker("Category", selection: $categoryData) {
+                                ForEach(expenseVM.categoryVM.categoryOptionsArray) { item in
+                                    if let safeName = item.name {
+                                        Text(safeName).tag(CategoryFormData(category: item))
+                                    }
+                                }
+                            }.menuOrder(.priority)
+                            
+                            Button(action: {
+                                showAddCategoryPrompt.toggle()
+                            }, label: {
+                                Text("New Category")
+                            })
+
                         }
                     }
-                    .frame(maxWidth: 150)
+                    
+                    Spacer()
+                    
+                    if categoryData.categoryName != CategoryViewModel.DEFAULT_CATEGORY_NAME {
+                        VStack {
+                            ColorPicker(selection: $categoryData.categoryBackgroundColor, supportsOpacity: false) {
+                                Text("Background:")
+                            }
+                            ColorPicker(selection: $categoryData.categoryTextColor, supportsOpacity: false) {
+                                Text("Text:")
+                            }
+                        }
+                        .frame(maxWidth: 150)
+                    }
                 }
             }
-        }
-        .buttonStyle(.borderless)
+        }.buttonStyle(.borderless)
     }
 }
 
 #Preview {
-    return CategoryPickerView(expenseVM: ExpenseViewModel(), categoryData: CategoryFormData())
+    @State var categoryData = CategoryFormData()
+    return CategoryPickerView(expenseVM: ExpenseViewModel(), categoryData: $categoryData)
 }

@@ -44,7 +44,7 @@ struct FormExpenseView: View {
                         .keyboardType(.numberPad)
                 }
                 Section("Category") {
-                    CategoryPickerView(expenseVM: expenseVM, categoryData: expenseData.category)
+                    CategoryPickerView(expenseVM: expenseVM, categoryData: $expenseData.category)
                 }
                 
                 Section("Date") {
@@ -52,7 +52,13 @@ struct FormExpenseView: View {
                 }
 
                 Button(role.getButtonText()) {
+                    expenseVM.categoryVM.changeCategoryColour(
+                        name: expenseData.category.categoryName,
+                        backgroundColor: expenseData.category.categoryBackgroundColor.toHexString(),
+                        textColor: expenseData.category.categoryTextColor.toHexString())
+                    
                     if let category = expenseVM.categoryVM.getCategoryByName(expenseData.category.categoryName) {
+                        
                         switch role {
                         case .add:
                             expenseVM.addExpense(name: expenseData.name, details: expenseData.details, category: category, amount: expenseData.amount, date: expenseData.dateCreated)

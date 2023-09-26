@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 class ExpenseViewModel: ObservableObject {
-    private static let viewContent = PersistenceController().container.viewContext //TODO:Change to proper container
+    private static let viewContent = PersistenceController.shared.container.viewContext //TODO:Change to proper container
     private static var request = Expense.fetchRequest()
     
     var categoryVM = CategoryViewModel(viewContext: viewContent)
@@ -21,7 +21,7 @@ class ExpenseViewModel: ObservableObject {
         fetchExpenseData()
     }
     
-    private func fetchExpenseData() {
+    func fetchExpenseData() {
         do {
             expenseArray = try Self.viewContent.fetch(Self.request)
         } catch {

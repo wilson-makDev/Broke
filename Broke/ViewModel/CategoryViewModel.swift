@@ -15,8 +15,8 @@ class CategoryViewModel: ObservableObject {
     private static var request = Category.fetchRequest()
     
     static let DEFAULT_CATEGORY_NAME = "None"
-    static let DEFAULT_BACKGROUND_COLOR = "#000000"
-    static let DEFAULT_TEXT_COLOR = "#FFFFFF"
+    static let DEFAULT_BACKGROUND_COLOR = Color("ExpenseColor").toHexString()
+    static let DEFAULT_TEXT_COLOR = Color("ExpenseTextColor").toHexString()
     
     @Published var categoryOptionsArray: [Category] = []
     
@@ -75,7 +75,7 @@ class CategoryViewModel: ObservableObject {
             return
         }
         
-        if let categoryToChange = categoryOptionsArray.first(where: { category in category.name == name.lowercased() }) {
+        if let categoryToChange = categoryOptionsArray.first(where: { category in category.name == name.capitalized }) {
             categoryToChange.backgroundColor = backgroundColor
             categoryToChange.textColor = textColor
         }
