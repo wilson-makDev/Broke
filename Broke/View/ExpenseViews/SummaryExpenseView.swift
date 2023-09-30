@@ -13,8 +13,6 @@ struct SummaryExpenseView: View {
     
     var body: some View {
         VStack(alignment: .center) {
-            Text("Expenses").font(.title)
-            Rectangle().fill((Color("Background"))).frame(height: 150)
             TotalExpenesesView(expenseVM: expenseVM)
             
             Spacer()

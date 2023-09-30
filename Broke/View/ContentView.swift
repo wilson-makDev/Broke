@@ -16,6 +16,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             VStack {
+                GraphExpenseView(expenseVM: expenseVM).frame(height: 150).padding()
                 SummaryExpenseView(expenseVM: expenseVM)
                 DateRangePickerView(expenseVM: expenseVM, fromDate: fromDate, toDate: toDate)
             }

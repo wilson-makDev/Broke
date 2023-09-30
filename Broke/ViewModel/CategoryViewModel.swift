@@ -83,4 +83,11 @@ class CategoryViewModel: ObservableObject {
         self.save()
         self.fetchCategoryData()
     }
+    
+    func getColorMapping() -> [String: Color] {
+        return categoryOptionsArray.reduce(into: [String:Color]()) { partialResult, category in
+            let safeCategory = CategoryFormData(category: category)
+            partialResult[safeCategory.categoryName] = safeCategory.categoryBackgroundColor
+        }
+    }
 }
