@@ -21,6 +21,19 @@ class ExpenseViewModel: ObservableObject {
         fetchExpenseData()
     }
     
+    convenience init(from: Date, to: Date) {
+        Self.request.predicate = Self.updateDateFetchString(from, to)
+        self.init()
+    }
+    
+    private static func updateDateFetchString(_ from: Date, _ to: Date) -> NSPredicate {
+        let fromDate = NSPredicate(format: "dateCreated >= %@", from as NSDate)
+        let toDate = NSPredicate(format: "dateCreated <= %@", to as NSDate)
+        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromDate, toDate])
+        
+        return predicate
+    }
+    
     func fetchExpenseData() {
         do {
             expenseArray = try Self.viewContent.fetch(Self.request)
@@ -35,6 +48,11 @@ class ExpenseViewModel: ObservableObject {
         } catch {
             print("ExpenseViewModel saving error: [\(error)]")
         }
+    }
+    
+    func changeDateRange(_ from: Date, _ to: Date) {
+        Self.request.predicate = Self.updateDateFetchString(from, to)
+        self.fetchExpenseData()
     }
     
     func addExpense(name: String, details: String, category: Category, amount: Float, date: Date) {
@@ -76,25 +94,5 @@ class ExpenseViewModel: ObservableObject {
         }
         
         return CurrencyFormater().numberFormatter.string(for: sumAsFloat) ?? "$NIL"
-    }
-}
-
-extension ExpenseViewModel {
-    convenience init(from: Date, to: Date) {
-        Self.request.predicate = Self.updateDateFetchString(from, to)
-        self.init()
-    }
-    
-    private static func updateDateFetchString(_ from: Date, _ to: Date) -> NSPredicate {
-        let fromDate = NSPredicate(format: "dateCreated >= %@", from as NSDate)
-        let toDate = NSPredicate(format: "dateCreated <= %@", to as NSDate)
-        let predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [fromDate, toDate])
-        
-        return predicate
-    }
-    
-    func changeDateRange(_ from: Date, _ to: Date) {
-        Self.request.predicate = Self.updateDateFetchString(from, to)
-        self.fetchExpenseData()
     }
 }
