@@ -30,6 +30,7 @@
 		C1B54C5D2AB354E900DFB867 /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B54C5C2AB354E900DFB867 /* ExpenseViewModel.swift */; };
 		C1B54C612AB90C4100DFB867 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B54C602AB90C4100DFB867 /* CategoryViewModel.swift */; };
 		C1C947342ABE261200B07E27 /* ExpenseFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C947332ABE261200B07E27 /* ExpenseFormData.swift */; };
+		C1CEEC862AC73A7200192F31 /* GraphExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CEEC852AC73A7200192F31 /* GraphExpenseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		C1B54C5C2AB354E900DFB867 /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
 		C1B54C602AB90C4100DFB867 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		C1C947332ABE261200B07E27 /* ExpenseFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseFormData.swift; sourceTree = "<group>"; };
+		C1CEEC852AC73A7200192F31 /* GraphExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphExpenseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		C15355932AAE927D00E9AEAE /* ExpenseViews */ = {
 			isa = PBXGroup;
 			children = (
+				C1CEEC842AC73A0C00192F31 /* GroupExpenseViews */,
 				C1C947302ABE256900B07E27 /* FormExpenseViews */,
 				C1A3FE452AAFB65700968A67 /* SummaryExpenseView.swift */,
 				C1A3FE472AB0DB0A00968A67 /* RowExpenseView.swift */,
@@ -223,6 +226,14 @@
 				C11684852AC21C2500403EEE /* CategoryPickerView.swift */,
 			);
 			path = FormExpenseViews;
+			sourceTree = "<group>";
+		};
+		C1CEEC842AC73A0C00192F31 /* GroupExpenseViews */ = {
+			isa = PBXGroup;
+			children = (
+				C1CEEC852AC73A7200192F31 /* GraphExpenseView.swift */,
+			);
+			path = GroupExpenseViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,6 +372,7 @@
 				C1B54C5D2AB354E900DFB867 /* ExpenseViewModel.swift in Sources */,
 				C11684862AC21C2500403EEE /* CategoryPickerView.swift in Sources */,
 				C1B54C562AB252D300DFB867 /* ListExpenseView.swift in Sources */,
+				C1CEEC862AC73A7200192F31 /* GraphExpenseView.swift in Sources */,
 				C1C947342ABE261200B07E27 /* ExpenseFormData.swift in Sources */,
 				C16375772AAB9CAC00C8A7A4 /* Broke.xcdatamodeld in Sources */,
 				C1A3FE462AAFB65700968A67 /* SummaryExpenseView.swift in Sources */,
