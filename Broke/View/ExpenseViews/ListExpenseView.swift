@@ -29,7 +29,7 @@ struct ListExpenseView: View {
                 }
             }
             .listStyle(.plain)
-            .animation(.easeIn, value: expenseVM.expenseArray.count)
+            .animation(.default, value: expenseVM.expenseArray)
             .scrollIndicators(.visible)
         }
         .padding(.horizontal, 1)
