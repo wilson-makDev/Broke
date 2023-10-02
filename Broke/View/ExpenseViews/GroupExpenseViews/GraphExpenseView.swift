@@ -17,7 +17,16 @@ struct GraphExpenseView: View {
     
     var body: some View {
         Chart {
-            ForEach(expenseVM.expenseArray) { expense in
+            ForEach(expenseVM.expenseArray.sorted(by: { lhsExp, rhsExp in
+                let safeLhs = ExpenseFormData(from: lhsExp)
+                let safeRhs = ExpenseFormData(from: rhsExp)
+                
+                if safeLhs.dateCreated == safeRhs.dateCreated {
+                    return safeLhs.category.categoryName < safeRhs.category.categoryName
+                }
+                
+                return safeLhs.dateCreated > safeRhs.dateCreated
+            })) { expense in
                 let safeExpense = ExpenseFormData(from: expense)
                 BarMark(
                     x: .value("Date", safeExpense.dateCreated.formatted(date: .numeric, time: .omitted)),
