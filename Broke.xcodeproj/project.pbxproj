@@ -56,7 +56,7 @@
 		C11684852AC21C2500403EEE /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
 		C153558A2AAE6E1C00E9AEAE /* FormExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormExpenseView.swift; sourceTree = "<group>"; };
 		C15355912AAE8D1900E9AEAE /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
-		C16375672AAB9CAA00C8A7A4 /* Broke.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Broke.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C16375672AAB9CAA00C8A7A4 /* Broke - Expense Tracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Broke - Expense Tracking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C163756A2AAB9CAA00C8A7A4 /* BrokeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokeApp.swift; sourceTree = "<group>"; };
 		C163756C2AAB9CAA00C8A7A4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C163756E2AAB9CAC00C8A7A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		C16375682AAB9CAA00C8A7A4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C16375672AAB9CAA00C8A7A4 /* Broke.app */,
+				C16375672AAB9CAA00C8A7A4 /* Broke - Expense Tracking.app */,
 				C163757D2AAB9CAD00C8A7A4 /* BrokeTests.xctest */,
 				C16375872AAB9CAD00C8A7A4 /* BrokeUITests.xctest */,
 			);
@@ -239,9 +239,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C16375662AAB9CAA00C8A7A4 /* Broke */ = {
+		C16375662AAB9CAA00C8A7A4 /* Broke - Expense Tracking */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C16375912AAB9CAD00C8A7A4 /* Build configuration list for PBXNativeTarget "Broke" */;
+			buildConfigurationList = C16375912AAB9CAD00C8A7A4 /* Build configuration list for PBXNativeTarget "Broke - Expense Tracking" */;
 			buildPhases = (
 				C16375632AAB9CAA00C8A7A4 /* Sources */,
 				C16375642AAB9CAA00C8A7A4 /* Frameworks */,
@@ -251,9 +251,9 @@
 			);
 			dependencies = (
 			);
-			name = Broke;
+			name = "Broke - Expense Tracking";
 			productName = Broke;
-			productReference = C16375672AAB9CAA00C8A7A4 /* Broke.app */;
+			productReference = C16375672AAB9CAA00C8A7A4 /* Broke - Expense Tracking.app */;
 			productType = "com.apple.product-type.application";
 		};
 		C163757C2AAB9CAD00C8A7A4 /* BrokeTests */ = {
@@ -328,7 +328,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C16375662AAB9CAA00C8A7A4 /* Broke */,
+				C16375662AAB9CAA00C8A7A4 /* Broke - Expense Tracking */,
 				C163757C2AAB9CAD00C8A7A4 /* BrokeTests */,
 				C16375862AAB9CAD00C8A7A4 /* BrokeUITests */,
 			);
@@ -410,12 +410,12 @@
 /* Begin PBXTargetDependency section */
 		C163757F2AAB9CAD00C8A7A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C16375662AAB9CAA00C8A7A4 /* Broke */;
+			target = C16375662AAB9CAA00C8A7A4 /* Broke - Expense Tracking */;
 			targetProxy = C163757E2AAB9CAD00C8A7A4 /* PBXContainerItemProxy */;
 		};
 		C16375892AAB9CAD00C8A7A4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = C16375662AAB9CAA00C8A7A4 /* Broke */;
+			target = C16375662AAB9CAA00C8A7A4 /* Broke - Expense Tracking */;
 			targetProxy = C16375882AAB9CAD00C8A7A4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -548,7 +548,7 @@
 				DEVELOPMENT_TEAM = 6FTNGLJ5P4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Broke - Expenese Tracker";
+				INFOPLIST_KEY_CFBundleDisplayName = "Broke - Expense Tracking";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -559,7 +559,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wilson-mak.Broke-expense-tracker";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wilson-mak.Broke-expense-tracking";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -581,7 +581,7 @@
 				DEVELOPMENT_TEAM = 6FTNGLJ5P4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "Broke - Expenese Tracker";
+				INFOPLIST_KEY_CFBundleDisplayName = "Broke - Expense Tracking";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -592,7 +592,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.wilson-mak.Broke-expense-tracker";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.wilson-mak.Broke-expense-tracking";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -691,7 +691,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C16375912AAB9CAD00C8A7A4 /* Build configuration list for PBXNativeTarget "Broke" */ = {
+		C16375912AAB9CAD00C8A7A4 /* Build configuration list for PBXNativeTarget "Broke - Expense Tracking" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C16375922AAB9CAD00C8A7A4 /* Debug */,
