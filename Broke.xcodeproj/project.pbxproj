@@ -56,6 +56,7 @@
 		C11684852AC21C2500403EEE /* CategoryPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerView.swift; sourceTree = "<group>"; };
 		C153558A2AAE6E1C00E9AEAE /* FormExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormExpenseView.swift; sourceTree = "<group>"; };
 		C15355912AAE8D1900E9AEAE /* CurrencyFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyFormatter.swift; sourceTree = "<group>"; };
+		C16040402ACBAF1300F240F5 /* Broke---Expense-Tracking-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Broke---Expense-Tracking-Info.plist"; sourceTree = "<group>"; };
 		C16375672AAB9CAA00C8A7A4 /* Broke - Expense Tracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Broke - Expense Tracking.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C163756A2AAB9CAA00C8A7A4 /* BrokeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokeApp.swift; sourceTree = "<group>"; };
 		C163756C2AAB9CAA00C8A7A4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 		C163755E2AAB9CAA00C8A7A4 = {
 			isa = PBXGroup;
 			children = (
+				C16040402ACBAF1300F240F5 /* Broke---Expense-Tracking-Info.plist */,
 				C16375692AAB9CAA00C8A7A4 /* Broke */,
 				C16375802AAB9CAD00C8A7A4 /* BrokeTests */,
 				C163758A2AAB9CAD00C8A7A4 /* BrokeUITests */,
@@ -548,6 +550,7 @@
 				DEVELOPMENT_TEAM = 6FTNGLJ5P4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Broke---Expense-Tracking-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Broke - Expense Tracking";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -581,6 +584,7 @@
 				DEVELOPMENT_TEAM = 6FTNGLJ5P4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Broke---Expense-Tracking-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Broke - Expense Tracking";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.finance";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
