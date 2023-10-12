@@ -51,7 +51,9 @@ class ExpenseViewModel: ObservableObject {
     }
     
     func changeDateRange(_ from: Date, _ to: Date) {
-        Self.request.predicate = Self.updateDateFetchString(from, to)
+        let startOfDayFrom = Calendar.current.date(bySettingHour: 0, minute: 0, second: 1, of: from) ?? from
+        let endOfDayTo = Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: to) ?? to
+        Self.request.predicate = Self.updateDateFetchString(startOfDayFrom, endOfDayTo)
         self.fetchExpenseData()
     }
     
