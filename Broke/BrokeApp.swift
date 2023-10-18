@@ -11,14 +11,18 @@ import SwiftUI
 struct BrokeApp: App {
     let persistenceController = PersistenceController.shared
     
-    private static let defaultDateRange: (from: Date, to: Date) = (Calendar.current.date(byAdding: DateComponents(month: -1), to: Date())!,
-                                                                   Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: Date())!)
+    @StateObject var expenseVM = ExpenseViewModel()
+    @StateObject var dateRangeVM = DateRangeViewModel()
     
-    @StateObject var expenseVM = ExpenseViewModel(from: defaultDateRange.from, to: defaultDateRange.to)
+    init() {
+        
+        //TODO: Do not call StateObject before views are loaded 
+        expenseVM.changeDateRange(dateRangeVM.dateRange.from, dateRangeVM.dateRange.to)
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView(expenseVM: expenseVM, fromDate: Self.defaultDateRange.from, toDate: Self.defaultDateRange.to)
+            ContentView(expenseVM: expenseVM, dateRangeVM: dateRangeVM)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

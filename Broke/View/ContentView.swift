@@ -10,15 +10,14 @@ import CoreData
 
 struct ContentView: View {
     @ObservedObject var expenseVM: ExpenseViewModel
-    var fromDate: Date
-    var toDate: Date
+    @ObservedObject var dateRangeVM: DateRangeViewModel
 
     var body: some View {
         NavigationStack {
             VStack {
                 GraphExpenseView(expenseVM: expenseVM).frame(height: 150).padding()
                 SummaryExpenseView(expenseVM: expenseVM)
-                DateRangePickerView(expenseVM: expenseVM, fromDate: fromDate, toDate: toDate)
+                DateRangePickerView(expenseVM: expenseVM, dateRangeVM: dateRangeVM)
             }
         }
         .background(Color("Background"))
@@ -26,11 +25,10 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    private static var viewModel = ExpenseViewModel()
-    private static let dateRange: (from: Date, to: Date) = (Calendar.current.date(byAdding: DateComponents(month: -1), to: Date())!,
-                                                                   Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: Date())!)
+    private static var expenseVM = ExpenseViewModel()
+    private static var dateRangeVM = DateRangeViewModel()
     
     static var previews: some View {
-        ContentView(expenseVM: viewModel, fromDate: dateRange.from, toDate: dateRange.to).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView(expenseVM: expenseVM, dateRangeVM: dateRangeVM).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
