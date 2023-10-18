@@ -59,7 +59,7 @@ class ExpenseViewModel: ObservableObject {
     
     func addExpense(name: String, details: String, category: Category, amount: Float, date: Date) {
         let expense = Expense(context: Self.viewContent)
-        expense.dateCreated = Calendar.current.date(bySettingHour: 0, minute: 0, second: 1, of: date)
+        expense.dateCreated = date
         expense.name = name
         expense.details = details
         expense.category = category
