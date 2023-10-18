@@ -25,7 +25,8 @@ struct UserDefaultsModel {
     }
     
     func hasValue(of key: Key) -> Bool {
-        return Self.userDefaults.value(forKey: key.rawValue) != nil
+        let value = Self.userDefaults.value(forKey: key.rawValue)
+        return value != nil
     }
     
     enum Key: String {

@@ -15,7 +15,7 @@ class DateRangeViewModel: ObservableObject {
     private static let userDefaults = UserDefaultsModel()
     private static let emptyDate: Date? = nil
 
-    @Published private(set) var dateRange: DateRange
+    @Published var dateRange: DateRange
     
     init() {
         self.dateRange = DateRange(
@@ -24,7 +24,7 @@ class DateRangeViewModel: ObservableObject {
         )
     }
     
-    func clearSavedDateRangeBound(of bound: Bound) {
+    func clearSavedBound(of bound: Bound) {
         switch bound {
         case .from:
             Self.userDefaults.setValue(of: .from, withValue: Self.emptyDate)
@@ -38,26 +38,12 @@ class DateRangeViewModel: ObservableObject {
         Self.userDefaults.setValue(of: .to, withValue: Self.emptyDate)
     }
     
-    func setDateRangeBound(of bound: Bound, with newDate: Date, updateDefaults toSave: Bool = false) {
+    func saveBound(for bound: Bound) {
         switch bound {
         case .from:
-            dateRange.from = newDate
-            if (toSave) {
-                Self.userDefaults.setValue(of: .from, withValue: newDate)
-            }
+            Self.userDefaults.setValue(of: .from, withValue: dateRange.from)
         case .to:
-            dateRange.to = newDate
-            if (toSave) {
-                Self.userDefaults.setValue(of: .to, withValue: newDate)
-            }
-        }
-    }
-    
-    func setDateRange(with newDateRange: DateRange, updateDefaults toSave: Bool = false) {
-        dateRange = newDateRange
-        if (toSave) {
-            Self.userDefaults.setValue(of: .from, withValue: newDateRange.from)
-            Self.userDefaults.setValue(of: .to, withValue: newDateRange.to)
+            Self.userDefaults.setValue(of: .to, withValue: dateRange.to)
         }
     }
     
