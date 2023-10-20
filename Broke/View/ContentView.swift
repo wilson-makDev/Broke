@@ -21,6 +21,9 @@ struct ContentView: View {
             }
         }
         .background(Color("Background"))
+        .onAppear(perform: {
+            expenseVM.changeDateRange(dateRangeVM.dateRange.from, dateRangeVM.dateRange.to)
+        })
     }
 }
 

@@ -13,12 +13,6 @@ struct BrokeApp: App {
     
     @StateObject var expenseVM = ExpenseViewModel()
     @StateObject var dateRangeVM = DateRangeViewModel()
-    
-    init() {
-        
-        //TODO: Do not call StateObject before views are loaded 
-        expenseVM.changeDateRange(dateRangeVM.dateRange.from, dateRangeVM.dateRange.to)
-    }
 
     var body: some Scene {
         WindowGroup {
