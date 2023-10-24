@@ -9,11 +9,7 @@ import SwiftUI
 import Charts
 
 struct GraphExpenseView: View {
-    @ObservedObject var expenseVM: ExpenseViewModel
-    
-    init(expenseVM: ExpenseViewModel) {
-        self.expenseVM = expenseVM
-    }
+    @EnvironmentObject var expenseVM: ExpenseViewModel
     
     var body: some View {
         Chart {
@@ -44,5 +40,5 @@ struct GraphExpenseView: View {
 }
 
 #Preview {
-    GraphExpenseView(expenseVM: ExpenseViewModel())
+    GraphExpenseView().environmentObject(ExpenseViewModel())
 }

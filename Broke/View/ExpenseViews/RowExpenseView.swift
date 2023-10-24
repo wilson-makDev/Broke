@@ -12,11 +12,11 @@ struct RowExpenseView: View {
     @State private var opened = false
     @State private var isActive = false
     
-    @ObservedObject var expenseVM: ExpenseViewModel
+    @EnvironmentObject var expenseVM: ExpenseViewModel
     
     var body: some View {
         NavigationLink {
-            FormExpenseView(edit: expense, expenseVM: expenseVM)
+            FormExpenseView(edit: expense)
         } label: {
             VStack(alignment: .leading) {
                 HStack {
@@ -67,7 +67,8 @@ struct RowExpenseView_Previews: PreviewProvider {
     static var expenseVM = ExpenseViewModel()
     
     static var previews: some View {
-        RowExpenseView(expense: expenseVM.expenseArray.first!, expenseVM: expenseVM)
+        RowExpenseView(expense: expenseVM.expenseArray.first!)
             .frame(maxWidth: 350, maxHeight: 100)
+            .environmentObject(expenseVM)
     }
 }

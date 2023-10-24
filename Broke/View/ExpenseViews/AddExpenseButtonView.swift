@@ -9,11 +9,11 @@ import SwiftUI
 
 struct AddExpenseButtonView: View {
     
-    @ObservedObject var expenseVM: ExpenseViewModel
+    @EnvironmentObject var expenseVM: ExpenseViewModel
     
     var body: some View {
         NavigationLink {
-            FormExpenseView(expenseVM: expenseVM)
+            FormExpenseView()
         } label: {
             Image(systemName: "plus.circle")
                 .imageScale(.large)
@@ -28,6 +28,7 @@ struct AddExpenseButtonView: View {
 
 struct AddExpenseButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        AddExpenseButtonView(expenseVM: ExpenseViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        AddExpenseButtonView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(ExpenseViewModel())
     }
 }

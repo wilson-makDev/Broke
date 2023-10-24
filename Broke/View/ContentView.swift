@@ -9,15 +9,15 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @ObservedObject var expenseVM: ExpenseViewModel
+    @EnvironmentObject var expenseVM: ExpenseViewModel
     @ObservedObject var dateRangeVM: DateRangeViewModel
 
     var body: some View {
         NavigationStack {
             VStack {
-                GraphExpenseView(expenseVM: expenseVM).frame(height: 150).padding()
-                SummaryExpenseView(expenseVM: expenseVM)
-                DateRangePickerView(expenseVM: expenseVM, dateRangeVM: dateRangeVM)
+                GraphExpenseView().frame(height: 150).padding()
+                SummaryExpenseView()
+                DateRangePickerView(dateRangeVM: dateRangeVM)
             }
         }
         .background(Color("Background"))
@@ -28,10 +28,9 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
-    private static var expenseVM = ExpenseViewModel()
     private static var dateRangeVM = DateRangeViewModel()
     
     static var previews: some View {
-        ContentView(expenseVM: expenseVM, dateRangeVM: dateRangeVM).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ContentView(dateRangeVM: dateRangeVM).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).environmentObject(ExpenseViewModel())
     }
 }

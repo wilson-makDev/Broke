@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CategoryPickerView: View {
-    @ObservedObject var expenseVM: ExpenseViewModel
+    @EnvironmentObject var expenseVM: ExpenseViewModel
     @State var newCategoryName = ""
     @State var showAddCategoryPrompt = false
     @Binding var categoryData: CategoryFormData
@@ -78,5 +78,5 @@ struct CategoryPickerView: View {
 
 #Preview {
     @State var categoryData = CategoryFormData()
-    return CategoryPickerView(expenseVM: ExpenseViewModel(), categoryData: $categoryData)
+    return CategoryPickerView(categoryData: $categoryData).environmentObject(ExpenseViewModel())
 }

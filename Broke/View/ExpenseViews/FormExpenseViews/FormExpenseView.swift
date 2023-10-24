@@ -9,20 +9,19 @@ import SwiftUI
 
 struct FormExpenseView: View {
     @State private var expenseData: ExpenseFormData = ExpenseFormData()
-    @ObservedObject var expenseVM: ExpenseViewModel
+    @EnvironmentObject var expenseVM: ExpenseViewModel
     
     @Environment(\.presentationMode) var presentation
     
     private var role: ExpenseFormRole
     private let currencyFormat = CurrencyFormater()
     
-    init(expenseVM: ExpenseViewModel) {
-        self.expenseVM = expenseVM
+    init() {
         role = .add
     }
     
-    init(edit expense: Expense, expenseVM: ExpenseViewModel) {
-        self.init(expenseVM: expenseVM)
+    init(edit expense: Expense) {
+        self.init()
         expenseData = ExpenseFormData(from: expense)
         role = .edit(orignal: expense)
     }
@@ -44,7 +43,7 @@ struct FormExpenseView: View {
                         .keyboardType(.numbersAndPunctuation)
                 }
                 Section("Category") {
-                    CategoryPickerView(expenseVM: expenseVM, categoryData: $expenseData.category)
+                    CategoryPickerView(expenseVM: _expenseVM, categoryData: $expenseData.category)
                 }
                 
                 Section("Date") {
@@ -80,6 +79,7 @@ struct FormExpenseView: View {
 
 struct FormExpenseView_Previews: PreviewProvider {
     static var previews: some View {
-        FormExpenseView(expenseVM: ExpenseViewModel()).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        FormExpenseView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(ExpenseViewModel())
     }
 }

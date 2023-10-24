@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TotalExpenesesView: View {
-    @ObservedObject var expenseVM: ExpenseViewModel
+    @EnvironmentObject var expenseVM: ExpenseViewModel
     
     var body: some View {
         HStack {
@@ -19,9 +19,7 @@ struct TotalExpenesesView: View {
     }
 }
 struct TotalExpnesesView_Previews: PreviewProvider {
-    static let expenseVM = ExpenseViewModel()
-    
     static var previews: some View {
-        TotalExpenesesView(expenseVM: expenseVM)
+        TotalExpenesesView().environmentObject(ExpenseViewModel())
     }
 }

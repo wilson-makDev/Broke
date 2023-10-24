@@ -16,8 +16,9 @@ struct BrokeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView(expenseVM: expenseVM, dateRangeVM: dateRangeVM)
+            ContentView(dateRangeVM: dateRangeVM)
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .environmentObject(expenseVM)
         }
     }
 }

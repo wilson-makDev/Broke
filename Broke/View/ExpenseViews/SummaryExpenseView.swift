@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct SummaryExpenseView: View {
-    @ObservedObject var expenseVM: ExpenseViewModel
+    @EnvironmentObject var expenseVM: ExpenseViewModel
     @State var selectedExpense: Expense? = nil
     
     var body: some View {
         VStack(alignment: .center) {
-            TotalExpenesesView(expenseVM: expenseVM)
+            TotalExpenesesView()
             
             Spacer()
             
@@ -21,19 +21,18 @@ struct SummaryExpenseView: View {
                 Text("Wow no expenses here!").font(.title3)
                 Spacer()
             } else {
-                ListExpenseView(expenseVM: expenseVM)
+                ListExpenseView()
                     .padding()
             }
 
-            AddExpenseButtonView(expenseVM: expenseVM)
+            AddExpenseButtonView()
         }.animation(.default, value: expenseVM.expenseArray.isEmpty)
     }
 }
 
 struct SummaryExpenseView_Previews: PreviewProvider {
-    static let expenseVM = ExpenseViewModel()
-    
     static var previews: some View {
-        SummaryExpenseView(expenseVM: expenseVM).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        SummaryExpenseView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(ExpenseViewModel())
     }
 }

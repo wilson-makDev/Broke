@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ListExpenseView: View {
-    @ObservedObject var expenseVM: ExpenseViewModel
+    @EnvironmentObject var expenseVM: ExpenseViewModel
     
     var body: some View {
         VStack(alignment: .trailing) {
             Text("Recent").font(.subheadline)
             List {
                 ForEach(expenseVM.expenseArray) { expense in
-                    RowExpenseView(expense: expense, expenseVM: expenseVM)
+                    RowExpenseView(expense: expense)
                         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                             Button(role: .destructive) {
                                 expenseVM.deleteExpense(expense)
@@ -37,9 +37,8 @@ struct ListExpenseView: View {
 }
 
 struct ListExpenseView_Previews: PreviewProvider {
-    static let expenseVM = ExpenseViewModel()
-    
     static var previews: some View {
-        ListExpenseView(expenseVM: expenseVM).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        ListExpenseView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            .environmentObject(ExpenseViewModel())
     }
 }
