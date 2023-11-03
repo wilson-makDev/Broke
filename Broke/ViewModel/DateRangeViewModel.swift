@@ -8,13 +8,14 @@
 import Foundation
 
 class DateRangeViewModel: ObservableObject {
-    
-    //TODO: Should set time to start of day for default
-    private static let defaultDateRange = DateRange(from: Calendar.current.date(byAdding: DateComponents(month: -1), to: Date())!,
-                                                    to: Calendar.current.date(bySettingHour: 23, minute: 59, second: 59, of: Date())!)
+    private static let today = Date()
+    private static let calendar = Calendar.current
+
+    private static let defaultDateRange = DateRange(from: calendar.date(byAdding: DateComponents(month: -1), to: calendar.startOfDay(for: today))!,
+                                                    to: calendar.endOfDay(for: today))
     private static let userDefaults = UserDefaultsModel()
     private static let emptyDate: Date? = nil
-
+    
     @Published var dateRange: DateRange
     
     init() {
@@ -56,9 +57,30 @@ class DateRangeViewModel: ObservableObject {
         }
     }
     
+    func setToScheduleRange(of schedule: ScheduleChoice) {
+        dateRange = schedule.dateRange()
+    }
+    
     enum Bound {
         case from
         case to
+    }
+    
+    enum ScheduleChoice {
+        case day
+        case week
+        case month
+        
+        func dateRange() -> DateRange {
+            switch self {
+            case .day:
+                return DateRange(from: calendar.startOfDay(for: today), to: calendar.endOfDay(for: today))
+            case .week:
+                return DateRange(from: calendar.startOfWeek(for: today), to: calendar.endOfWeek(for: today))
+            case .month:
+                return DateRange(from: calendar.startOfMonth(for: today), to: calendar.endOfMonth(for: today))
+            }
+        }
     }
     
     struct DateRange {
