@@ -23,6 +23,7 @@
 		C163758E2AAB9CAD00C8A7A4 /* BrokeUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C163758D2AAB9CAD00C8A7A4 /* BrokeUITestsLaunchTests.swift */; };
 		C1A3FE462AAFB65700968A67 /* SummaryExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A3FE452AAFB65700968A67 /* SummaryExpenseView.swift */; };
 		C1A3FE482AB0DB0A00968A67 /* RowExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A3FE472AB0DB0A00968A67 /* RowExpenseView.swift */; };
+		C1B48AA52AE31F410089B621 /* ScheduleChoicePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B48AA42AE31F410089B621 /* ScheduleChoicePickerView.swift */; };
 		C1B54C542AB2085500DFB867 /* AddExpenseButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B54C532AB2085500DFB867 /* AddExpenseButtonView.swift */; };
 		C1B54C562AB252D300DFB867 /* ListExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B54C552AB252D300DFB867 /* ListExpenseView.swift */; };
 		C1B54C582AB2542E00DFB867 /* TotalExpnesesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B54C572AB2542E00DFB867 /* TotalExpnesesView.swift */; };
@@ -31,6 +32,7 @@
 		C1B54C612AB90C4100DFB867 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B54C602AB90C4100DFB867 /* CategoryViewModel.swift */; };
 		C1C947342ABE261200B07E27 /* ExpenseFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C947332ABE261200B07E27 /* ExpenseFormData.swift */; };
 		C1CEEC862AC73A7200192F31 /* GraphExpenseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CEEC852AC73A7200192F31 /* GraphExpenseView.swift */; };
+		C1DDE5CC2AE85EC60052AA43 /* StartEndOf+Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1DDE5CB2AE85EC60052AA43 /* StartEndOf+Calendar.swift */; };
 		C1E692672AE0523F009C20BA /* DateRangeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E692662AE0523F009C20BA /* DateRangeViewModel.swift */; };
 		C1E6926B2AE05C7D009C20BA /* UserDefaultsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E6926A2AE05C7D009C20BA /* UserDefaultsModel.swift */; };
 /* End PBXBuildFile section */
@@ -73,6 +75,7 @@
 		C163758D2AAB9CAD00C8A7A4 /* BrokeUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrokeUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		C1A3FE452AAFB65700968A67 /* SummaryExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryExpenseView.swift; sourceTree = "<group>"; };
 		C1A3FE472AB0DB0A00968A67 /* RowExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowExpenseView.swift; sourceTree = "<group>"; };
+		C1B48AA42AE31F410089B621 /* ScheduleChoicePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleChoicePickerView.swift; sourceTree = "<group>"; };
 		C1B54C532AB2085500DFB867 /* AddExpenseButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseButtonView.swift; sourceTree = "<group>"; };
 		C1B54C552AB252D300DFB867 /* ListExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExpenseView.swift; sourceTree = "<group>"; };
 		C1B54C572AB2542E00DFB867 /* TotalExpnesesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalExpnesesView.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 		C1B54C602AB90C4100DFB867 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
 		C1C947332ABE261200B07E27 /* ExpenseFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseFormData.swift; sourceTree = "<group>"; };
 		C1CEEC852AC73A7200192F31 /* GraphExpenseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphExpenseView.swift; sourceTree = "<group>"; };
+		C1DDE5CB2AE85EC60052AA43 /* StartEndOf+Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StartEndOf+Calendar.swift"; sourceTree = "<group>"; };
 		C1E692662AE0523F009C20BA /* DateRangeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangeViewModel.swift; sourceTree = "<group>"; };
 		C1E6926A2AE05C7D009C20BA /* UserDefaultsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				C116847C2ABF722800403EEE /* Color+RGBComponents.swift */,
+				C1DDE5CB2AE85EC60052AA43 /* StartEndOf+Calendar.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -121,9 +126,9 @@
 		C15355892AAE6DF900E9AEAE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C1B48AA32AE31F030089B621 /* DateRangeViews */,
 				C15355932AAE927D00E9AEAE /* ExpenseViews */,
 				C163756C2AAB9CAA00C8A7A4 /* ContentView.swift */,
-				C1B54C592AB254A700DFB867 /* DateRangePickerView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -211,6 +216,15 @@
 				C163758D2AAB9CAD00C8A7A4 /* BrokeUITestsLaunchTests.swift */,
 			);
 			path = BrokeUITests;
+			sourceTree = "<group>";
+		};
+		C1B48AA32AE31F030089B621 /* DateRangeViews */ = {
+			isa = PBXGroup;
+			children = (
+				C1B54C592AB254A700DFB867 /* DateRangePickerView.swift */,
+				C1B48AA42AE31F410089B621 /* ScheduleChoicePickerView.swift */,
+			);
+			path = DateRangeViews;
 			sourceTree = "<group>";
 		};
 		C1B54C5B2AB351BF00DFB867 /* ViewModel */ = {
@@ -397,7 +411,9 @@
 				C1E6926B2AE05C7D009C20BA /* UserDefaultsModel.swift in Sources */,
 				C11684802AC1F5DB00403EEE /* CategoryFormData.swift in Sources */,
 				C1B54C5A2AB254A700DFB867 /* DateRangePickerView.swift in Sources */,
+				C1DDE5CC2AE85EC60052AA43 /* StartEndOf+Calendar.swift in Sources */,
 				C1B54C542AB2085500DFB867 /* AddExpenseButtonView.swift in Sources */,
+				C1B48AA52AE31F410089B621 /* ScheduleChoicePickerView.swift in Sources */,
 				C163756B2AAB9CAA00C8A7A4 /* BrokeApp.swift in Sources */,
 				C1A3FE482AB0DB0A00968A67 /* RowExpenseView.swift in Sources */,
 				C116847D2ABF722800403EEE /* Color+RGBComponents.swift in Sources */,
