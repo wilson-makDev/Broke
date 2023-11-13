@@ -16,63 +16,72 @@ class DateRangeViewModel: ObservableObject {
     private static let userDefaults = UserDefaultsModel()
     private static let emptyDate: Date? = nil
     
-    @Published var dateRange: DateRange
-    
-    init() {
-        self.dateRange = DateRange(
+    private static var userDefaultRange: DateRange {
+        return DateRange(
             from: Self.userDefaults.getValue(ofKey: .from) ?? Self.defaultDateRange.from,
             to: Self.userDefaults.getValue(ofKey: .to) ?? Self.defaultDateRange.to
         )
     }
     
-    func clearSavedBound(of bound: Bound) {
-        switch bound {
-        case .from:
-            Self.userDefaults.setValue(of: .from, withValue: Self.emptyDate)
-        case .to:
-            Self.userDefaults.setValue(of: .to, withValue: Self.emptyDate)
+    @Published private var _dateRange: DateRange
+    @Published private var _scheduleChoice: ScheduleChoice
+    
+    var dateRange: DateRange {
+        get {
+            _dateRange
+        }
+        set {
+            _dateRange = newValue
+            saveDate(_dateRange)
         }
     }
     
-    func clearSavedDateRange() {
-        Self.userDefaults.setValue(of: .from, withValue: Self.emptyDate)
-        Self.userDefaults.setValue(of: .to, withValue: Self.emptyDate)
-    }
-    
-    func saveBound(for bound: Bound) {
-        switch bound {
-        case .from:
-            Self.userDefaults.setValue(of: .from, withValue: dateRange.from)
-        case .to:
-            Self.userDefaults.setValue(of: .to, withValue: dateRange.to)
+    var scheduleChoice: ScheduleChoice {
+        get {
+            _scheduleChoice
+        }
+        set {
+            _scheduleChoice = newValue
+            saveSchedule(_scheduleChoice)
+            dateRange = _scheduleChoice.dateRange() ?? Self.userDefaultRange
         }
     }
     
-    func hasBoundSaved(for bound: Bound) -> Bool {
-        switch bound {
-        case .from:
-            return Self.userDefaults.hasValue(of: .from)
-        case .to:
-            return Self.userDefaults.hasValue(of: .to)
+    init() {
+        var schedule: ScheduleChoice = .custom
+        if let rawScheduleValue: String = Self.userDefaults.getValue(ofKey: .scheduleChoice) {
+            schedule = ScheduleChoice(rawValue: rawScheduleValue) ?? schedule
+        }
+        
+        _scheduleChoice = schedule
+        _dateRange = schedule.dateRange() ?? Self.userDefaultRange
+    }
+    
+    private func saveDate(_ newDate: DateRange) {
+        if scheduleChoice == .custom {
+            Self.userDefaults.setValue(of: .from, withValue: newDate.from)
+            Self.userDefaults.setValue(of: .to, withValue: newDate.to)
         }
     }
     
-    func setToScheduleRange(of schedule: ScheduleChoice) {
-        dateRange = schedule.dateRange()
+    private func saveSchedule(_ newSchedule: ScheduleChoice) {
+        Self.userDefaults.setValue(of: .scheduleChoice, withValue: newSchedule.rawValue)
     }
     
-    enum Bound {
-        case from
-        case to
-    }
-    
-    enum ScheduleChoice {
+    enum ScheduleChoice: String, CaseIterable, Identifiable {
+        var id: Self {
+            self
+        }
+        
+        case custom
         case day
         case week
         case month
         
-        func dateRange() -> DateRange {
+        func dateRange() -> DateRange? {
             switch self {
+            case .custom:
+                return nil
             case .day:
                 return DateRange(from: calendar.startOfDay(for: today), to: calendar.endOfDay(for: today))
             case .week:

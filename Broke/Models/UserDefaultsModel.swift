@@ -20,7 +20,7 @@ struct UserDefaultsModel {
         return nil
     }
     
-    func setValue<T>(of key: Key, withValue value: T?) {
+    func setValue<T>(of key: Key, withValue value: T?) { //TODO: value must be primitive, date or data object, make more clear
         Self.userDefaults.setValue(value, forKey: key.rawValue)
     }
     
@@ -32,5 +32,6 @@ struct UserDefaultsModel {
     enum Key: String {
         case from = "fromDate"
         case to = "toDate"
+        case scheduleChoice = "scheduleChoice"
     }
 }
