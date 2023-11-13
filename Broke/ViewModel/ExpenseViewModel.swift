@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 
 class ExpenseViewModel: ObservableObject {
-    private static let viewContent = PersistenceController.shared.container.viewContext //TODO:Change to proper container
+    private static let viewContent = PersistenceController.shared.container.viewContext
     private static var request = Expense.fetchRequest()
     
     var categoryVM = CategoryViewModel(viewContext: viewContent)
